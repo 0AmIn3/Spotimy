@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.hovercont{
+    transition: 0.3s;
+    
+    &:hover .playhover{
+        opacity: 1;
+        bottom: 00px;
+
+    }
+    
+    .playhover{
+     opacity: 0;
+        transition: 0.3s;
+        bottom: -10px;
+        right: 0;
+    }
+}

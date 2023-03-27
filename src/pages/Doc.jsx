@@ -1,4 +1,6 @@
 import React from 'react';
+import Artict from '../components/Artict';
+import GoToPlayList from '../components/GoToPlayList';
 
 const Doc = () => {
     return (
@@ -6,6 +8,8 @@ const Doc = () => {
             <h1>
                 DOC 
             </h1>
+
+
         </div>
     );
 };
