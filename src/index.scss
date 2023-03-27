@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+
+.homeLogo{
+   background-image: url('../public/HomeLogo.png');
+}
+.searchLogo{
+   background-image: url('../public/SearchLogo.png');
+}
+.libraryLogo{
+   background-image: url('../public/LibraryLogo.png');
+}
+.plusLogo{
+   background-image: url('../public/+LibraryLogo.png');
+}
+.likedLogo{
+   background-image: url('../public/Liked\ SongsLogo.png');
+}
+.active:nth-child(1) div{
+   background-image: url('../public/HomeFillLogo.png');
+}
+.active:nth-child(2) div{
+   background-image: url('../public/SearchFillLogo.png');
+}
+.active:nth-child(3) div{
+   background-image: url('../public/Liked\ SongsLogo.png');
+}
+.line{
+   width: 100%;
+   border: 1px solid #282828;
+}
