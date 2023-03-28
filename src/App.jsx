@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import Doc from "./pages/doc";
+import Settings from "./pages/Settings";
 function App() {
 
 	let location = useLocation()
@@ -18,6 +19,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Layout/>} >
                 <Route index path="/" element={<Doc/>}/>
+                <Route path="/settings" element={<Settings/>}/>
             </Route>
 		</Routes>
 	)

@@ -2,16 +2,21 @@ import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import VolumeUp from '@mui/icons-material/VolumeUp';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const FooterRight = () => {
 
-   const [value, setValue] = useState(30);
+   const [value, setValue] = useState(40);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+   let audio = document.querySelector('audio')
+   audio.volume = `0.${value}`
+}, [value])
 
    return ( 
       <div className="flex items-center gap-[14px]">
