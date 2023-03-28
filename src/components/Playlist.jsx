@@ -2,7 +2,7 @@ const Playlist = () => {
     return (
         <div className="w-[95%] m-auto">
 
-            <div className="bg-[red] flex w-[800px]">
+            <div className=" flex w-[800px]">
 
                 <img src="/images/popMix.png" />
 
