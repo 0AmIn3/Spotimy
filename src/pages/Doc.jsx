@@ -1,15 +1,10 @@
 import React from 'react';
-import Artict from '../components/Artict';
-import GoToPlayList from '../components/GoToPlayList';
-
 const Doc = () => {
     return (
         <div>
             <h1>
-                DOC 
+                DOC
             </h1>
-
-
         </div>
     );
 };
