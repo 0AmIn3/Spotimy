@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *{
@@ -38,4 +39,23 @@
 .line{
    width: 100%;
    border: 1px solid #282828;
+}
+
+
+.hovercont{
+    transition: 0.3s;
+    
+    &:hover .playhover{
+        opacity: 1;
+        bottom: 00px;
+
+    }
+    
+    .playhover{
+     opacity: 0;
+        transition: 0.3s;
+        bottom: -10px;
+        right: 0;
+    }
+
 }
