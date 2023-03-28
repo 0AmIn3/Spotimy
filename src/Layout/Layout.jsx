@@ -9,6 +9,7 @@ const Layout = () => {
          <div className="w-[77.2%] relative ml-[20.2%] ">
          <Header/>
          <main className="my-[110px] h-[2000px]">
+            <Outlet/>
          </main>
          </div>
       </div>
