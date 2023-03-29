@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '../component/List';
+import List from '../components/List';
 
 const Doc = () => {
     return (
@@ -10,5 +10,6 @@ const Doc = () => {
         </div>
     );
 };
+
 
 export default Doc;
