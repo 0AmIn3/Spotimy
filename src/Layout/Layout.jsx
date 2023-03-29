@@ -9,7 +9,7 @@ const Layout = () => {
          <Aside/>
          <div className="w-[77.2%] relative ml-[20.2%] ">
          <Header/>
-         <main className="my-[110px] ">
+         <main className="my-[110px] min-h-[100vh]">
             <Outlet/>
          </main>
          <Footer/>
