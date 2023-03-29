@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import GoToPlayList from "../components/GoToPlayList";
 import Items from "../components/Items";
 import Musicblock from "../components/Musicblock";
-import { spotify } from "../Layout/Layout";
 
 const Home = () => {
 

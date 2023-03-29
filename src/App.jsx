@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Playlist from "./components/Playlist";
-import Layout, { spotify } from "./Layout/Layout";
+import Layout from "./Layout/Layout";
 import Doc from "./pages/doc";
 import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";

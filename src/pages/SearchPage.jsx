@@ -11,13 +11,6 @@ import "swiper/css/scrollbar";
 const SearchPage = () => {
 	// console.log(hr);
 	// setHref('/search')
-
-	useEffect(() => {
-		let body = document.body;
-		body.style.backgroundColor =
-			"red";
-		body.style.backgroundRepeat = "no-repeat";
-	}, []);
 	return (
 		<div className="">
 			<div className="flex flex-col gap-7">
