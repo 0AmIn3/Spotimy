@@ -22,14 +22,13 @@ const Categories = ({ item }) => {
           />
         </div>
       </div>
-
       <div className="w-full pt-[5px] h-[35%]">
         <p className="font-bold text-[#FFF] text-[22px]">{item.name}</p>
         <p className="font-[450] text-[18px] text-[#B3B3B3] pt-[8px] ">
           {item.desc}
         </p>
       </div>
-      
+
     </div>
   );
 };
