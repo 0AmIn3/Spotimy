@@ -7,6 +7,7 @@ import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Layout = () => {
+
    const [token, setToken] = useState('')
 	const {client_id,REDIRECT_URI,AUTH_ENDPOINT,RESPONSE_TYPE} = useContext(spotify);
 
