@@ -1,0 +1,31 @@
+.head-row{
+
+    th, td{
+        
+        border-bottom: 1px solid #666666;
+        color: #B3B3B3;
+        font-size: 16px;
+        font-weight: 450;
+    }
+}
+
+
+.body-row{
+
+    th, td{
+        border-bottom: none !important;
+        
+        color: #B3B3B3;
+        font-size: 18px;
+    }
+    th{
+        text-align: left;
+        width: 10px;
+    }
+    
+}
+
+.table-bg{
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
