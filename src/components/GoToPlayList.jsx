@@ -2,7 +2,7 @@ import React from "react";
 
 const GoToPlayList = () => {
   return (
-    <div className="w-[224px] h-[324px] px-[21px] hovercont  pt-5 pb-[18px] rounded-lg bg-[#1B1B1B] hover:bg-[#363335]">
+    <div className="w-[224px] h-[324px] px-[21px] hovercont cursor-pointer pt-5 pb-[18px] rounded-lg bg-[#1B1B1B] hover:bg-[#363335]">
       <div className="w-full h-[182px] relative">
         <img src="/img/pop.jpg" className="w-full" alt="" />
         <img src="/img/play.svg" className="w-[62px] absolute  playhover" alt="" />
