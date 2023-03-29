@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 // import PlayList from "./components/Playlist";
 import Layout from "./Layout/Layout";
@@ -7,6 +7,8 @@ import PlayList from "./pages/PlayList";
 function App() {
 
 	let location = useLocation()
+
+
 	useEffect(() => {
 		let body = document.body
 		if (location.pathname === '/') {
