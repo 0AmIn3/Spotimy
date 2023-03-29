@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
    return ( 
-      <header className="w-[77.2%] h-[80px] fixed flex items-center justify-between">
+      <header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
          <div className="flex items-center gap-[22px]">
             <img src="../../public/back.png" alt="" className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"/>
             <img src="../../public/next.png" alt="" className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"/>
@@ -24,7 +25,7 @@ const Header = () => {
                      <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                 </li>
                 <li>
-                    <a href="../settings/index.html" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                    <Link to={'/settings'} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</Link>
                 </li>
                 <li>
                     <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
