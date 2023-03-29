@@ -1,0 +1,21 @@
+.head-row{
+    th, td{
+        text-align: start;
+        
+    }
+}
+
+
+.body-row{
+
+    th, td{
+        border-bottom: none !important;
+        text-align: start;
+        
+    }
+    th{
+        text-align: left;
+        width: 10px;
+    }
+    
+}
