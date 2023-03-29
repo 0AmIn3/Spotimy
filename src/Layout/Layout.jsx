@@ -1,18 +1,19 @@
 import { Outlet } from "react-router-dom";
 import Aside from "../components/Aside";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const Layout = () => {
    return ( 
-      <div className="flex relative">
-         <Aside/>
-         <div className="w-[77.2%] relative ml-[20.2%] ">
-         <Header/>
-         <main className="my-[110px] h-[2000px]">
-            <Outlet/>
-         </main>
-         </div>
+      <div className="w-full h-screen flex">
+      <div className="w-[18%] h-[80%]">
+        <Aside />
       </div>
+      <div className="w-[82%] h-full">
+        <Header />
+        <Outlet></Outlet>
+      </div>
+    </div>
     );
 }
  
