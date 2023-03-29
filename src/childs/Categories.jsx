@@ -14,7 +14,7 @@ const Categories = ({ item }) => {
         }}
         className="w-full h-[65%]"
       >
-        <div className="float-right hidden relative pt-[137px] pr-[8px] forHv2  z-10 justify-end items-end">
+        <div className="float-right hidden relative pt-[137px] pr-[8px] forHv2   z-10 justify-end items-end">
           <BsPlayCircleFill
             size={"50px"}
             color="#1ed760"

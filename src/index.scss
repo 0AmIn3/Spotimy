@@ -48,11 +48,17 @@
 
   &:hover .playhover {
     opacity: 1;
-    bottom: 00px;
+    bottom: 0px;
   }
 
   .linear {
     background: linear-gradient(134.97deg, #3822ea 3.13%, #a3a6e5 100%);
+  }
+  .playhover{
+    bottom: -20px;
+    opacity: 0;
+    right: 0;
+    transition: 0.3s;
   }
 }
 
@@ -70,7 +76,7 @@
 .forTr {
   transition: 0.5s ease;
 }
-}
+
 
 .grid-block {
    height: 82px;
