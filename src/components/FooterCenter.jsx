@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 
 const FooterCenter = () => {
 
-   const [play, setPlay] = useState(true)
+   const [play, setPlay] = useState(false)
+
+   useEffect(() => {
+      let audio = document.querySelector('audio')
+      play ? audio.play() : audio.pause()
+   }, [play])
 
 
    return ( 
