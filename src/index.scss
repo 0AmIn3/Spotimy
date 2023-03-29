@@ -36,6 +36,9 @@
 .active:nth-child(3) div{
    background-image: url('../public/Liked\ SongsLogo.png');
 }
+.active p {
+   color: white;
+}
 .line{
    width: 100%;
    border: 1px solid #282828;
@@ -58,4 +61,39 @@
         right: 0;
     }
 
+}
+.grid-block {
+   height: 82px;
+   border-radius: 6px;
+   background: #FFFFFF10;
+   display: flex;
+   align-items: center;
+   gap: 21px;
+   cursor: pointer;
+   transition: 500ms;
+   
+   &:hover{
+   background: #FFFFFF40;
+   }
+
+   .grid-img {
+      width: 82px;
+      height: 82px;
+      background-image: url("../public/chillmix.png");
+      background-size: cover;
+      opacity: 1;
+   }
+
+   .grid-text {
+      font-family: 'Manrope';
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+   }
+}
+.secondgrid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	width: 100%;
+	grid-gap: 27px;
 }
