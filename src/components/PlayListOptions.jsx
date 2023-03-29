@@ -2,7 +2,7 @@ import React from "react";
 
 const PlayListOptions = () => {
   return (
-    <div className=" flex justify-between">
+    <div className="flex justify-between px-2">
       <div className=" flex gap-10 items-center">
         <div className="flex items-center">
           <img src="/img/play.svg" className="w-[72px]" alt="" />
@@ -15,9 +15,10 @@ const PlayListOptions = () => {
       </div>
       <div className="flex items-center">
         <img src="/img/SearchPlaylist.png" className="w-[23px]" alt="" />
-        <select name="" id="">
+        {/* <select name="" id="">
           Custom order
-        </select>
+        </select> */}
+        <p className="text-[16px] font-bold text-white">Custom order</p>
       </div>
     </div>
   );
