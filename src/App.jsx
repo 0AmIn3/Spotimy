@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Playlist from "./components/Playlist";
 import Layout from "./Layout/Layout";
 import Doc from "./pages/doc";
 function App() {
@@ -18,6 +19,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Layout/>} >
                 <Route index path="/" element={<Doc/>}/>
+                <Route path="/playlist" element={<Playlist/>}/>
             </Route>
 		</Routes>
 	)
