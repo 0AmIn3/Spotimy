@@ -1,13 +1,12 @@
 
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-// import PlayList from "./components/Playlist";
 import Layout from "./Layout/Layout";
 import Doc from "./pages/doc";
-import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
+import PlayList from "./pages/PlayList"
 
 function App() {
 
@@ -27,7 +26,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Layout/>} >
                 <Route index path="/" element={<Home/>}/>
-                <Route path="/playlist" element={<Playlist/>}/>
+                <Route path="/playlist" element={<PlayList/>}/>
                 <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/settings" element={<Settings/>}/>
             </Route>
