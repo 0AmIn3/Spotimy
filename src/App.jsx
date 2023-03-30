@@ -4,6 +4,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import Doc from "./pages/doc";
 import PlayList from "./pages/PlayList";
+import SearchPage from "./pages/SearchPage";
+import Home from "./pages/Home";
+import Settings from "./pages/Settings";
 function App() {
 
 	let location = useLocation()
@@ -21,8 +24,10 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />} >
-				<Route index path="/" element={<Doc />} />
+				<Route index path="/" element={<Home />} />
 				<Route path="/playlist" element={<PlayList />} />
+				<Route path="/search" element={<SearchPage />} />
+				<Route path="/settings" element={<Settings />} />
 			</Route>
 		</Routes>
 	)

@@ -98,3 +98,36 @@
 	width: 100%;
 	grid-gap: 27px;
 }
+
+
+
+
+.swiper-button-next:after{
+   background-image: url(../public/img/swiperNext.png);
+   background-position: center;
+   background-size: 100%;
+   background-repeat: no-repeat;
+   color: transparent;
+   font-size: 100px;
+   position: absolute;
+   right: 10px !important;
+   cursor: pointer;
+   transition: 0.3s ease !important;
+
+}
+.swiper-button-prev:after{
+   background-image: url(../public/img/swiperprev.png);
+   background-position: center;
+   background-size: 100%;
+   background-repeat: no-repeat;
+   color: transparent;
+   font-size: 100px;
+   position: absolute;
+   cursor: pointer;
+   left: 10px !important;
+   transition: 0.3s ease !important;
+
+}
+.swiper-button-disabled{
+   opacity: 0 !important;
+}
