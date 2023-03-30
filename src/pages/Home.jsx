@@ -5,10 +5,10 @@ import Musicblock from "../components/Musicblock";
 
 const Home = () => {
 
-   useEffect(() => {
+	useEffect(() => {
 		let body = document.body
-      body.style.backgroundImage = 'linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)'
-      body.style.backgroundRepeat = 'no-repeat'
+		body.style.backgroundImage = 'linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)'
+		body.style.backgroundRepeat = 'no-repeat'
 	}, [])
 
 	return (
@@ -27,7 +27,7 @@ const Home = () => {
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Your top mixes
 			</p>
-			<div className="secondgrid">
+			<div className="flex flex-wrap gap-[30px]">
 				<GoToPlayList />
 				<GoToPlayList />
 				<GoToPlayList />
@@ -37,7 +37,7 @@ const Home = () => {
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Made for you
 			</p>
-			<div className="secondgrid">
+			<div className="flex flex-wrap gap-[30px]">
 				<GoToPlayList />
 				<GoToPlayList />
 				<GoToPlayList />
