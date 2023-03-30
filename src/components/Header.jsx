@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
 
+import axios from "axios";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
    return ( 
@@ -31,7 +34,7 @@ const Header = () => {
                     <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                 </li>
                 </ul>
-                <div className="py-1">
+                <div class="py-1">
                 <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                 </div>
                 </div>

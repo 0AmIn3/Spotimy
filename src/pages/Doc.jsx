@@ -1,6 +1,7 @@
 import React from 'react';
 // import GenresCard from '../components/GenresCars';
 
+
 const Doc = () => {
     return (
         <div>
@@ -12,5 +13,6 @@ const Doc = () => {
         </div>
     );
 };
+
 
 export default Doc;
