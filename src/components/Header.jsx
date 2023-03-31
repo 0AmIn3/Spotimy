@@ -1,18 +1,20 @@
 
 import axios from "axios";
 import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
 
     const token = useContext(tokenCTX)
-
+    const {search, setSearchResults} = useContext(searchCTX)
     useEffect(() => {
         axios.get('https://api.spotify.com/v1/me', {
            headers: {Authorization: `Bearer ${token}`}
         }).then(res => console.log(res))
     }, [])
+    const {pathname} = useLocation();
 
 	return (
 		<header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
@@ -27,6 +29,16 @@ const Header = () => {
 					alt=""
 					className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
+            {pathname === '/search' ? (
+            <div className="inpSearch w-[468px] h-[52px] items-center gap-[14px] px-[16px] bg-[#fff] cursor-pointer rounded-[26px] overflow-hidden">
+            <img
+					src="../../public/Search.png"
+					alt=""
+					className="w-[32px] h-[32px] cursor-pointer hover:invert-[8%]"
+				/>
+            <input type="text" name="search" placeholder="Artists, songs, or podcasts" className="inp" onKeyUp={(e) => setSearchResults(e.target.value)}/>
+            </div>
+            ) : null}
 			</div>
 			<div className="">
 				<button

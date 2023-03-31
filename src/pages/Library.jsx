@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Categories from "../childs/Categories";
 import { BsPlayCircleFill } from "react-icons/bs";
 
 const Library = () => {
-  
+  useEffect(() => {
+    let inpSearch = document.querySelector('.inpSearch')
+		inpSearch.style.display = 'none'
+  })
   const flex = [
     {
       name: "Afro “Select” Vi...",
