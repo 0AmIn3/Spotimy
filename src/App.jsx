@@ -26,7 +26,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Layout/>} >
                 <Route index path="/" element={<Home/>}/>
-                <Route path="/playlist" element={<PlayList/>}/>
+                <Route path="/playlist/:id" element={<PlayList/>}/>
                 <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/settings" element={<Settings/>}/>
             </Route>

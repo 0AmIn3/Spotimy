@@ -1,12 +1,11 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { musicCTX } from '../contexts/musicCTX';
 
 const FooterCenter = () => {
 
    let {play, changePlay, src} = useContext(musicCTX)
-   console.log(play);
 
    useEffect(() => {
       let audio = document.querySelector('audio')

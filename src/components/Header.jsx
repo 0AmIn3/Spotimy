@@ -12,7 +12,7 @@ const Header = () => {
 	useEffect(() => {
 	    axios.get('https://api.spotify.com/v1/me', {
 	       headers: {Authorization: `Bearer ${token}`}
-	    }).then(res => console.log(res))
+	    }).then(res => {})
 	}, [])
 	const {pathname} = useLocation();
 

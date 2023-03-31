@@ -7,9 +7,9 @@ import { Audio } from "react-loader-spinner";
 import "./../style.scss";
 import { musicCTX } from "../contexts/musicCTX";
 
-const Songs = ({ item, arr }) => {
+const Songs = ({ item, idx }) => {
 	const [isTurn, setIsTurn] = useState(false);
-	const { changeSrc, changeId, changePlay, changePlayTrue, id } = useContext(musicCTX);
+	const { changeSrc, changeId, changePlayTrue } = useContext(musicCTX);
 
 	return (
 		<TableRow
@@ -20,7 +20,7 @@ const Songs = ({ item, arr }) => {
 			className="body-row"
 		>
 			<TableCell component="th" scope="row">
-				<p className="count">{arr.indexOf(item) + 1}</p>
+				<p className="count">{idx + 1}</p>
 			</TableCell>
 			<TableCell align="left">
 				<div className="flex">

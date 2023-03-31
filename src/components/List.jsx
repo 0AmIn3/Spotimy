@@ -10,9 +10,7 @@ import Songs from "./Songs";
 import "./../style.scss";
 
 
-export default function List() {
-	const [data, setData] = useState([]);
-
+export default function List({arr}) {
 	return (
 		<div className="mt-[30px]">
 			<TableContainer className="table-bg px-8 " component={Paper}>
@@ -33,9 +31,9 @@ export default function List() {
 						</TableRow>
 					</TableHead>
 					<TableBody className="px-2">
-						{/* {data.map((item) => (
-							<Songs item={item} key={item.id} arr={data} />
-						))} */}
+						{arr.map((item, idx) => (
+							<Songs item={item.track} key={item.id} idx={idx} />
+						))}
 					</TableBody>
 				</Table>
 			</TableContainer>
