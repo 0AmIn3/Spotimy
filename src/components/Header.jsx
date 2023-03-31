@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
+
+
+    
    return ( 
       <header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
          <div className="flex items-center gap-[22px]">
