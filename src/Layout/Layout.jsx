@@ -6,12 +6,29 @@ import Header from "../components/Header";
 import { searchCTX } from "../contexts/searchCTX";
 import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
+import { musicCTX } from "../contexts/musicCTX";
 
 const Layout = () => {
 
    const [token, setToken] = useState('')
    const [search, setSearch] = useState('')
+   const [play, setPlay] = useState(false)
+   const [id, setId] = useState('')
+   const [src, setSrc] = useState('')
 
+   const changePlay = () => {
+      setPlay(!play)
+   }
+   const changePlayTrue = () => {
+      setPlay(true)
+   }
+   const changeId = (id) => {
+      setId(id)
+   }
+   const changeSrc = (src) => {
+      setSrc(src)
+   }
+   
    let setSearchResults = (text) => {
       let uptadeText = text.toLowerCase().trim()
       setSearch(uptadeText)
@@ -52,6 +69,7 @@ const Layout = () => {
 	return (
 		<tokenCTX.Provider value={token}>
 			<searchCTX.Provider value={{setSearchResults, search}}>
+            <musicCTX.Provider value={{changePlay, changeId, changeSrc, changePlayTrue, play, id, src}}>
          <div className="flex relative">
 				<Aside />
 				<div className="w-[77.2%] relative ml-[20.2%] ">
@@ -62,6 +80,7 @@ const Layout = () => {
 					<Footer />
 				</div>
 			</div>
+            </musicCTX.Provider>
          </searchCTX.Provider>
 		</tokenCTX.Provider>
 	);

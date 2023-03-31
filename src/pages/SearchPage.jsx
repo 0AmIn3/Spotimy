@@ -9,14 +9,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { searchCTX } from "../contexts/searchCTX";
+import { musicCTX } from "../contexts/musicCTX";
 import axios from 'axios'
 import { tokenCTX } from "../contexts/tokenCTX";
+import Songs from "../components/Songs";
 const SearchPage = () => {
 	// console.log(hr);
 	// setHref('/search')
 	const {search} = useContext(searchCTX)
 	const token = useContext(tokenCTX)
 	const [data, setData] = useState([])
+	const {changeSrc, changeId, changePlay, id} = useContext(musicCTX)
 
 	useEffect(() => {
 
@@ -41,7 +44,10 @@ const SearchPage = () => {
 				Best result
 			</p>
 				<div className="flex gap-[30px] items-start">
-				<div className="w-[38%] flex flex-col gap-[50px] hovercontwo relative h-[297.5px] bg-[#1B1B1B] rounded-lg hover:bg-[#363335]">
+				<div onClick={() => {
+					changeSrc(data[0]?.preview_url),
+					changePlayTrue()
+				}} className="w-[38%] flex flex-col gap-[50px] hovercontwo relative h-[297.5px] bg-[#1B1B1B] rounded-lg hover:bg-[#363335]">
 				<img src="/img/play.svg" className="w-[92px] absolute playhovertwo" alt="" />
 				<div className="w-[125px] h-[125px] shadowbox rounded-full bg-contain bg-center bg-no-repeat" style={{backgroundImage: `url("${data[0]?.album.images[1].url}")`}}></div>
 				<p className="font-bold leading-[0px] text-[35px] text-[#fff] font-Manrope">
@@ -49,7 +55,9 @@ const SearchPage = () => {
 				</p>
 				<p className="text-[#B3B3B3] text-lg font-normal">{data[0]?.artists[0].name}</p>
 				</div>
-				<div className="w-[60%] bg-[red] h-[5px]"></div>
+				<div className="w-[60%]">
+					{data.map((item) => <Songs item={item} arr={data} key={item.id}/>)}
+				</div>
 				</div>
 				</>
 			) : (

@@ -15,7 +15,7 @@ const FooterRight = () => {
 
   useEffect(() => {
    let audio = document.querySelector('audio')
-   audio.volume = `0.${value}`
+   audio.volume = value === 100 ? '1' : `0.${value}`
 }, [value])
 
    return ( 
