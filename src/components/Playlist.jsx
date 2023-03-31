@@ -1,18 +1,14 @@
 
 
 
-const Playlist = () => {
-
-    const editPlaylist = () => {
-
-    }
-
+const Playlist = ({img}) => {
+    console.log(img);
     return (
         <div className="w-[95%] m-auto mb-[30px]">
 
             <div className="flex ">
 
-                <img src="/images/popMix.png" />
+                <img src={img} />
 
                 <div className="flex flex-col justify-center text-[white] ml-[30px]">
                     <p className=" text-[14px]">PUBLIC PLAYLIST</p>

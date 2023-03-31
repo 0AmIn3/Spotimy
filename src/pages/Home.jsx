@@ -24,6 +24,7 @@ const Home = () => {
 		body.style.backgroundRepeat = "no-repeat";
 	}, []);
 
+
 	return (
 		<>
 			<p className="font-bold text-[39px] text-[#fff] font-Manrope">

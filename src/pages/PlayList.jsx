@@ -9,6 +9,7 @@ import { tokenCTX } from "../contexts/tokenCTX";
 const PlayList = () => {
     const [tracks, setTracks] = useState([])
     const {id} = useParams()
+    const {state} = useLocation()
 
     const token = useContext(tokenCTX)
 
@@ -28,7 +29,7 @@ const PlayList = () => {
     
     return (
         <>
-            <Playlist />
+            <Playlist img={state?.img} />
             <PlayListOptions />
             <List arr={tracks} />
         </>

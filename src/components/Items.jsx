@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Items = ({name, img, id}) => {
+    const navigate = useNavigate()
+
     return ( 
-        <Link to={`/playlist/${id}`} >
+        <Link to={`/playlist/${id}`} state={{img}} >
             <div className="grid-block overflow-hidden">
                 <div className="grid-img"style={{backgroundImage: `url(${img})`}} ></div>
                 <p className="grid-text">{name}</p>
