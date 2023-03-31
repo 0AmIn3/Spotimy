@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 import { useContext, useEffect, useState } from 'react'; 
+=======
+import { useState } from 'react';
+>>>>>>> 3c1c5a88304654c8132901b94b821529bbc33356
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Audio } from  'react-loader-spinner'
+import { Audio } from 'react-loader-spinner'
 import "./../style.scss"
 import { musicCTX } from '../contexts/musicCTX';
 
 
 
+<<<<<<< HEAD
 const Songs = ({item, arr}) => {
 
     const [isTurn , setIsTurn] = useState(false)
@@ -54,6 +59,32 @@ const Songs = ({item, arr}) => {
             </TableRow>
 
      );
+=======
+const Songs = ({ item }) => {
+
+  const [isTurn, setIsTurn] = useState(false)
+
+  return (
+    <>
+      <TableRow onClick={() => setIsTurn(!isTurn)} className='body-row'>
+        <TableCell component="th" scope="row">{isTurn ? <Audio height="28" width="28" /> : item.id}</TableCell>
+        <TableCell align="left">
+          <div className='flex'>
+            <img className='pr-4' src={item.albomImg} alt="" />
+            <div>
+              <h6 className={`${isTurn ? "text-[#65D36E]" : "text-[#fff]"}`} >{item.name}</h6>
+              <p>{item.singer}</p>
+            </div>
+          </div>
+        </TableCell>
+        <TableCell align="left">{item.name}</TableCell>
+        <TableCell align="left"></TableCell>
+        <TableCell align="center">{item.time}</TableCell>
+      </TableRow>
+
+    </>
+  );
+>>>>>>> 3c1c5a88304654c8132901b94b821529bbc33356
 }
- 
+
 export default Songs;

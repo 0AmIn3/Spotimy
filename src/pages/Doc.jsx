@@ -1,4 +1,5 @@
 import React from 'react';
+// import GenresCard from '../components/GenresCars';
 
 
 const Doc = () => {
