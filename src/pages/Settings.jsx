@@ -92,10 +92,6 @@ function getStyles(name, personName, theme) {
   }
 
 const Settings = () => {
-    useEffect(() => {
-      let body = document.body
-      body.style.backgroundColor = "#121212"
-    })
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([])
   
@@ -108,6 +104,10 @@ const Settings = () => {
         typeof value === 'string' ? value.split(',') : value,
       );
     }
+    useEffect(() => {
+      let body = document.body
+      body.style.background = "#121212"
+    })
     return ( 
         <div className="w-full bg-[#121212] p-[20px] w-[90%] mb-[120px]">
             <div className="w-[100%] flex justify-between mb-[30px]">

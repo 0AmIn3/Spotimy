@@ -45,7 +45,7 @@
 
 .hovercont {
   transition: 0.3s;
-
+   
   &:hover .playhover {
     opacity: 1;
     bottom: 0px;
@@ -61,6 +61,28 @@
     transition: 0.3s;
   }
 }
+.hovercontwo {
+   transition: 0.3s;
+   padding: 20px;
+   cursor: pointer;
+    
+   &:hover .playhovertwo {
+     opacity: 1;
+     bottom: 0px;
+   }
+ 
+   .playhovertwo{
+     bottom: -20px;
+     opacity: 0;
+     right: 0;
+     transition: 0.3s;
+   }
+ }
+ .shadowbox{
+   filter: drop-shadow(0px 0px 24px rgba(0, 0, 0, 0.25));
+ }
+
+
 
 .reactIcon {
   position: relative;
@@ -145,4 +167,24 @@
 }
 .swiper-button-disabled{
    opacity: 0 !important;
+}
+.inpSearch{
+   display: flex;
+}
+.inp{
+   all: unset;
+   width: 85%;
+   outline: 0;
+   height: 100%;
+   &::placeholder {
+      color: #757575;
+      font-size: 18px;
+   }
+}
+
+.count{
+   font-family: 'Manrope';
+   font-weight: 400;
+	font-size: 22px;
+	color: #B3B3B3;
 }

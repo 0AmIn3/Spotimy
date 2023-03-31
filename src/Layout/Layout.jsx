@@ -3,12 +3,37 @@ import { Outlet } from "react-router-dom";
 import Aside from "../components/Aside";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { searchCTX } from "../contexts/searchCTX";
 import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
+import { musicCTX } from "../contexts/musicCTX";
 
 const Layout = () => {
-  const [token, setToken] = useState("");
-  const { client_id, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE } = useContext(spotify);
+
+   const [token, setToken] = useState('')
+   const [search, setSearch] = useState('')
+   const [play, setPlay] = useState(false)
+   const [id, setId] = useState('')
+   const [src, setSrc] = useState('')
+
+   const changePlay = () => {
+      setPlay(!play)
+   }
+   const changePlayTrue = () => {
+      setPlay(true)
+   }
+   const changeId = (id) => {
+      setId(id)
+   }
+   const changeSrc = (src) => {
+      setSrc(src)
+   }
+   
+   let setSearchResults = (text) => {
+      let uptadeText = text.toLowerCase().trim()
+      setSearch(uptadeText)
+   }
+	const {client_id,REDIRECT_URI,AUTH_ENDPOINT,RESPONSE_TYPE} = useContext(spotify);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -38,20 +63,25 @@ const Layout = () => {
     );
   }
 
-  return (
-    <tokenCTX.Provider value={token}>
-      <div className="flex relative">
-        <Aside />
-        <div className="w-[77.2%] relative ml-[20.2%] ">
-          <Header />
-          <main className="mt-[110px] mb-[150px] min-h-[100vh]">
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-      </div>
-    </tokenCTX.Provider>
-  );
+
+	return (
+		<tokenCTX.Provider value={token}>
+			<searchCTX.Provider value={{setSearchResults, search}}>
+            <musicCTX.Provider value={{changePlay, changeId, changeSrc, changePlayTrue, play, id, src}}>
+         <div className="flex relative">
+				<Aside />
+				<div className="w-[77.2%] relative ml-[20.2%] ">
+					<Header />
+					<main className="mt-[110px] mb-[150px] min-h-[100vh]">
+						<Outlet />
+					</main>
+					<Footer />
+				</div>
+			</div>
+            </musicCTX.Provider>
+         </searchCTX.Provider>
+		</tokenCTX.Provider>
+	);
 };
 
 export default Layout;
