@@ -15,7 +15,6 @@ const PlayList = () => {
     
     return (
         <>
-
             <Playlist />
             <PlayListOptions />
             <List />

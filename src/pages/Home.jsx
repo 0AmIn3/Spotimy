@@ -30,7 +30,7 @@ const Home = () => {
       <div className="grid grid-cols-3 gap-x-[29px] gap-y-[16px] mt-[29px]">
 
 		{
-			MyPlaylists.map((item ,inx) =>(<Items key={inx} name={item.name} img ={item.images[0].url} />))
+			MyPlaylists.map((item ,inx) =>(<Items key={inx} name={item.name} img ={item?.images[0]?.url} />))
 		}
      
       </div>

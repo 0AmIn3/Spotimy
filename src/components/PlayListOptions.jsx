@@ -9,10 +9,7 @@ import Select from '@mui/material/Select';
 
 const PlayListOptions = () => {
 
-  const [age, setAge] = React.useState('');
-
-
-
+  const [age, setAge] = useState('');
   const [play, setPlay] = useState(false)
 
   useEffect(() => {
