@@ -30,7 +30,7 @@ const FooterCenter = () => {
 
 
    return ( 
-      <div className="flex flex-col items-center gap-[17px]">
+      <div className="itemscenter2 flex flex-col items-center gap-[17px]">
                <div className="flex items-center gap-[33px]">
                   <div className="w-[21.2px] h-[18.6px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]" style={{backgroundImage: "url('../../public/random.png')"}}></div>
                   <div className="w-[18px] h-[18px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]" style={{backgroundImage: "url('../../public/prev.png')"}}></div>

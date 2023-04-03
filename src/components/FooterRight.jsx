@@ -19,7 +19,7 @@ const FooterRight = () => {
 }, [value])
 
    return ( 
-      <div className="flex items-center gap-[14px]">
+      <div className="itemscenter absolute right-0 flex items-center gap-[14px]">
          <div className="w-[32px] h-[32px] bg-contain bg-no-repeat cursor-pointer duration-[500ms] hover:invert-[30%]" style={{backgroundImage: "url('../../Queue.png')"}}></div>
          <div className="w-[32px] h-[32px] bg-contain bg-no-repeat cursor-pointer duration-[500ms] hover:invert-[30%]" style={{backgroundImage: "url('../../Devices.png')"}}></div>
          <Stack spacing={2} direction="row" sx={{ width: '200px' }} alignItems="center">

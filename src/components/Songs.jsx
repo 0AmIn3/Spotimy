@@ -14,11 +14,11 @@ const Songs = ({ item, idx }) => {
 	const { changeInfo } = useContext(musicInfoCTX)
 
 	return (
-		<TableRow
+		<TableRow style={{width: '100%'}}
 			onClick={() => {
 				changeSrc(item.preview_url), changeId(item.id);
 				changePlayTrue();
-				changeInfo(item?.album?.images[2].url,item?.album?.name,item?.album?.artists[0].name)
+				changeInfo(item?.album?.images[2].url, item?.album?.images[1].url,item?.name,item?.album?.artists[0].name)
 
 			}}
 			className="body-row"
@@ -41,7 +41,7 @@ const Songs = ({ item, idx }) => {
 			</TableCell>
 			<TableCell align="left">{item.name}</TableCell>
 			<TableCell align="left"></TableCell>
-			<TableCell align="center"></TableCell>
+			<TableCell align="left">2 : 12</TableCell>
 		</TableRow>
 	);
 };

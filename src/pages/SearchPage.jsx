@@ -13,6 +13,7 @@ import { musicCTX } from "../contexts/musicCTX";
 import axios from 'axios'
 import { tokenCTX } from "../contexts/tokenCTX";
 import Songs from "../components/Songs";
+import { musicInfoCTX } from "../contexts/musicInfoCTX";
 const SearchPage = () => {
 	// console.log(hr);
 	// setHref('/search')
@@ -20,11 +21,12 @@ const SearchPage = () => {
 	const token = useContext(tokenCTX)
 	const [data, setData] = useState([])
 	const {changeSrc, changeId, changePlay, changePlayTrue, id} = useContext(musicCTX)
+	const { changeInfo } = useContext(musicInfoCTX)
 
 	useEffect(() => {
 
 	if(search.length > 0) {
-		axios.get(`https://api.spotify.com/v1/search?query=${search}&type=track&include_external=audio&market=UZ&locale=ru-RU%2Cru%3Bq%3D0.9%2Cen-US%3Bq%3D0.8%2Cen%3Bq%3D0.7&offset=5&limit=10`, {
+		axios.get(`https://api.spotify.com/v1/search?query=${search}&type=track&include_external=audio&market=UZ&locale=ru-RU%2Cru%3Bq%3D0.9%2Cen-US%3Bq%3D0.8%2Cen%3Bq%3D0.7&offset=5&limit=5`, {
 			headers: {Authorization: `Bearer ${token}`}
 		})
 		.then(res => setData(res.data.tracks.items))
@@ -47,18 +49,32 @@ const SearchPage = () => {
 				<div onClick={() => {
 					changeSrc(data[0]?.preview_url),
 					changePlayTrue()
+					changeInfo(data[0]?.album?.images[2].url, data[0]?.album?.images[1].url,data[0]?.album?.name,data[0]?.album?.artists[0].name)
 				}} className="w-[38%] flex flex-col gap-[50px] hovercontwo relative h-[297.5px] bg-[#1B1B1B] rounded-lg hover:bg-[#363335]">
 				<img src="/img/play.svg" className="w-[92px] absolute playhovertwo" alt="" />
-				<div className="w-[125px] h-[125px] shadowbox rounded-full bg-contain bg-center bg-no-repeat" style={{backgroundImage: `url("${data[0]?.album.images[1].url}")`}}></div>
+				<div className="w-[125px] h-[125px] shadowbox bg-contain bg-center bg-no-repeat" style={{backgroundImage: `url("${data[0]?.album.images[1].url}")`}}></div>
 				<p className="font-bold leading-[0px] text-[35px] text-[#fff] font-Manrope">
 				{data[0]?.name}
 				</p>
 				<p className="text-[#B3B3B3] text-lg font-normal">{data[0]?.artists[0].name}</p>
 				</div>
 				<div className="w-[60%]">
-					{data.map((item) => <Songs item={item} arr={data} key={item.id}/>)}
+					{data.map((item, idx) => <Songs item={item} idx={idx} key={item.id}/>)}
 				</div>
 				</div>
+				<div className="flex flex-col gap-7 mt-[70px]">
+				<h1 className=" text-3xl text-white font-bold">Browse all</h1>
+				<div className="grid gap-7 grid-cols-4 ">
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+					<GenresMini />
+				</div>
+			</div>
 				</>
 			) : (
 				<>
