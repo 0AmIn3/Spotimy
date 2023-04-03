@@ -7,6 +7,7 @@ import { searchCTX } from "../contexts/searchCTX";
 import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 import { musicCTX } from "../contexts/musicCTX";
+import {	musicInfoCTX } from '../contexts/musicInfoCTX'
 
 const Layout = () => {
 	const [token, setToken] = useState("");
@@ -14,6 +15,12 @@ const Layout = () => {
 	const [play, setPlay] = useState(false);
 	const [id, setId] = useState("");
 	const [src, setSrc] = useState("");
+	const [info, setInfo] = useState({
+		img: 'https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314',
+		title: 'Play It Safe',
+		artist: 'Julia Wolf'
+	})
+
 
 	const changePlay = () => {
 		setPlay(!play);
@@ -27,6 +34,14 @@ const Layout = () => {
 	const changeSrc = (src) => {
 		setSrc(src);
 	};
+
+	const changeInfo = (songimg, songtitle, songartist) => {
+		setInfo({
+			img: songimg,
+			title: songtitle,
+			artist: songartist
+		})
+	}
 
 	let setSearchResults = (text) => {
 		let uptadeText = text.toLowerCase().trim();
@@ -77,6 +92,7 @@ const Layout = () => {
 						src,
 					}}
 				>
+					<musicInfoCTX.Provider value={{changeInfo, info}}>
 					<div className="flex relative">
 						<Aside />
 						<div className="w-[77.2%] relative ml-[20.2%] ">
@@ -87,6 +103,7 @@ const Layout = () => {
 							<Footer />
 						</div>
 					</div>
+					</musicInfoCTX.Provider>
 				</musicCTX.Provider>
 			</searchCTX.Provider>
 		</tokenCTX.Provider>

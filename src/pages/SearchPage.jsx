@@ -19,7 +19,7 @@ const SearchPage = () => {
 	const {search} = useContext(searchCTX)
 	const token = useContext(tokenCTX)
 	const [data, setData] = useState([])
-	const {changeSrc, changeId, changePlay, id} = useContext(musicCTX)
+	const {changeSrc, changeId, changePlay, changePlayTrue, id} = useContext(musicCTX)
 
 	useEffect(() => {
 
