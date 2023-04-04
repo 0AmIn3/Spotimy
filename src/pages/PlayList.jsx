@@ -19,13 +19,13 @@ const PlayList = () => {
             headers: {Authorization: `Bearer ${token}`}
         })
         .then(res => setTracks(res?.data?.items))
-
         // temporary //
         let body = document.body
         body.style.backgroundImage = 'linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)'
         body.style.backgroundRepeat = 'no-repeat'
         // temporary //
     }, [])
+    // console.log(tracks);
     
     return (
         <>
