@@ -6,16 +6,20 @@ import TableRow from "@mui/material/TableRow";
 import { Audio } from "react-loader-spinner";
 import "./../style.scss";
 import { musicCTX } from "../contexts/musicCTX";
+import { musicInfoCTX } from "../contexts/musicInfoCTX";
 
 const Songs = ({ item, idx }) => {
 	const [isTurn, setIsTurn] = useState(false);
 	const { changeSrc, changeId, changePlayTrue } = useContext(musicCTX);
+	const { changeInfo } = useContext(musicInfoCTX)
 
 	return (
-		<TableRow
+		<TableRow style={{width: '100%'}}
 			onClick={() => {
 				changeSrc(item.preview_url), changeId(item.id);
 				changePlayTrue();
+				changeInfo(item?.album?.images[2].url, item?.album?.images[1].url,item?.name,item?.album?.artists[0].name)
+
 			}}
 			className="body-row"
 		>
@@ -37,7 +41,7 @@ const Songs = ({ item, idx }) => {
 			</TableCell>
 			<TableCell align="left">{item.name}</TableCell>
 			<TableCell align="left"></TableCell>
-			<TableCell align="center"></TableCell>
+			<TableCell align="left">2 : 12</TableCell>
 		</TableRow>
 	);
 };

@@ -34,6 +34,16 @@
 .active:nth-child(3) div {
   background-image: url("../public/Liked\ SongsLogo.png");
 }
+.itemscenter{
+  top: 50%;
+  transform: translateY(-50%);
+}
+.itemscenter2{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  position: absolute;
+}
 
 .active p {
    color: white;
