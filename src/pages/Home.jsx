@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import GoToPlayList from "../components/GoToPlayList";
 import Items from "../components/Items";
-import Musicblock from "../components/Musicblock";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Home = () => {
@@ -11,18 +10,13 @@ const Home = () => {
 
 	useEffect(() => {
 		axios
-			.get(`https://api.spotify.com/v1/me/playlists`, {
+			.get(`https://api.spotify.com/v1/users/31l55634sskmacncqzfimb573d34`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
-			.then((res) => setMyPlaylists(res.data.items));
+			.then((res) => console.log(res));
 	}, []);
 
-	useEffect(() => {
-		let body = document.body;
-		body.style.backgroundImage =
-			"linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)";
-		body.style.backgroundRepeat = "no-repeat";
-	}, []);
+
 
 
 	return (
