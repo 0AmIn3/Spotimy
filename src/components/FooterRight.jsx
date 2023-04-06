@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const FooterRight = () => {
 
-   const [value, setValue] = useState(40);
+   const [value, setValue] = useState(100);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

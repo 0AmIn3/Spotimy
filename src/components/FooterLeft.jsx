@@ -7,7 +7,6 @@ const FooterLeft = () => {
 
    const {info} = useContext(musicInfoCTX)
    const {changeOpen, open} = useContext(openBigImgCTX)
-   console.log(info);
 
    return ( 
       <div className="itemscenter absolute left-0 flex items-center gap-[22px] overflow-hidden">

@@ -29,7 +29,7 @@ const PlayList = () => {
     
     return (
         <>
-            <Playlist img={state?.img} />
+            <Playlist img={state?.img || state} />
             <PlayListOptions />
             <List arr={tracks} />
         </>

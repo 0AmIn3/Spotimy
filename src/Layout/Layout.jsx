@@ -9,6 +9,7 @@ import { tokenCTX } from "../contexts/tokenCTX";
 import { musicCTX } from "../contexts/musicCTX";
 import {	musicInfoCTX } from '../contexts/musicInfoCTX'
 import {	openBigImgCTX } from '../contexts/openBigImgCTX'
+import {	myPlaylistCTX } from '../contexts/myPlaylistsCTX'
 
 const Layout = () => {
 	const [token, setToken] = useState("");
@@ -53,6 +54,7 @@ const Layout = () => {
 		let uptadeText = text.toLowerCase().trim();
 		setSearch(uptadeText);
 	};
+	const [playlist, setPlaylist] = useState([])
 	const { client_id, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE } =
 		useContext(spotify);
 
@@ -100,6 +102,7 @@ const Layout = () => {
 				>
 					<musicInfoCTX.Provider value={{changeInfo, info}}>
 						<openBigImgCTX.Provider value={{changeOpen, open}}>
+							<myPlaylistCTX.Provider value={{setPlaylist, playlist}}>
 					<div className="flex relative">
 						<Aside />
 						<div className="w-[77.2%] relative ml-[20.2%] ">
@@ -110,6 +113,7 @@ const Layout = () => {
 							<Footer />
 						</div>
 					</div>
+							</myPlaylistCTX.Provider>
 						</openBigImgCTX.Provider>
 					</musicInfoCTX.Provider>
 				</musicCTX.Provider>

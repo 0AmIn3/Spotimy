@@ -15,6 +15,9 @@ const Header = () => {
 	    }).then(res => {})
 	}, [])
 	const {pathname} = useLocation();
+	const localClear = () => {
+		localStorage.clear()
+	}
 
 	return (
 		<header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
@@ -99,13 +102,12 @@ const Header = () => {
 							</a>
 						</li>
 					</ul>
-					<div className="py-1">
-						<a
-							href="#"
+					<div className="py-1" onClick={localClear}>
+						<p 
 							className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
 						>
 							Sign out
-						</a>
+						</p>
 					</div>
 				</div>
 			</div>
