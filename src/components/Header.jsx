@@ -6,7 +6,15 @@ import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
-
+	window.onscroll = () => {
+		let header = document.querySelector('header')
+		let val = window.scrollY
+		if(val === 0) {
+		header.style.background = `transparent`
+		} else {
+		header.style.background = `#000000${val * .3}`
+		}
+	}
 	const token = useContext(tokenCTX)
 	const {search, setSearchResults} = useContext(searchCTX)
 	useEffect(() => {
@@ -20,7 +28,7 @@ const Header = () => {
 	}
 
 	return (
-		<header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
+		<header className="w-[82%] h-[80px] fixed right-0 top-0 px-[41px] flex items-center duration-[200ms] justify-between z-10">
 			<div className="flex items-center gap-[22px]">
 				<img
 					src="../../public/back.png"

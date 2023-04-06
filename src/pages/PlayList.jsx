@@ -9,6 +9,7 @@ import { tokenCTX } from "../contexts/tokenCTX";
 const PlayList = () => {
     const [tracks, setTracks] = useState([])
     const {id} = useParams()
+    console.log(id);
     const {state} = useLocation()
 
     const token = useContext(tokenCTX)
