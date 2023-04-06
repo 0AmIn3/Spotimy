@@ -33,7 +33,7 @@ const Header = () => {
 	}
 
 	return (
-		<header className="w-[82%] h-[80px] fixed right-0 top-0 px-[41px] flex items-center duration-[200ms] justify-between z-10">
+		<header className="w-[82%] h-[80px] fixed right-0 top-0 px-[2.3%] flex items-center duration-[200ms] justify-between z-10">
 			<div className="flex items-center gap-[22px]">
 				<img
 					src="../../public/back.png"
