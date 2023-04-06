@@ -1,11 +1,11 @@
-
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link , useLocation} from "react-router-dom";
 import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
+	const [user, setUser] = useState('')
 	window.onscroll = () => {
 		let header = document.querySelector('header')
 		let val = window.scrollY
@@ -18,9 +18,14 @@ const Header = () => {
 	const token = useContext(tokenCTX)
 	const {search, setSearchResults} = useContext(searchCTX)
 	useEffect(() => {
-	    axios.get('https://api.spotify.com/v1/me', {
-	       headers: {Authorization: `Bearer ${token}`}
-	    }).then(res => {})
+			axios
+			  .get(`https://api.spotify.com/v1/me`, {
+				headers: { Authorization: `Bearer ${token}` },
+			  })
+			  .then((res) => {
+				  setUser(res.data)
+				  console.log(res.data);
+			  });
 	}, [])
 	const {pathname} = useLocation();
 	const localClear = () => {
@@ -60,12 +65,12 @@ const Header = () => {
 				>
 					<span className="sr-only">Open user menu</span>
 					<img
-						src="../../public/dava.png"
+						src={user !== '' ? user?.images[0]?.url : '../../dava.png'}
 						alt=""
-						className="mr-2 w-[34px] h-[34px] rounded-full avatar_layout"
+						className="mr-2 w-[34px] h-[34px] rounded-full avatar_layout davaImg"
 					/>
 					<span className="text-[#fff] font-Manrope text-[18px] font-bold">
-						davadirect3
+						{user.display_name}
 					</span>
 					<img
 						src="../../public/open.png"
