@@ -5,14 +5,14 @@ import List from "../components/List";
 import Playlist from "../components/Playlist";
 import PlayListOptions from "../components/PlayListOptions";
 import { tokenCTX } from "../contexts/tokenCTX";
+import SearchTracks from "../components/SearchTracks";
 
 const PlayList = () => {
-    const [tracks, setTracks] = useState([])
-    const {id} = useParams()
-    console.log(id);
-    const {state} = useLocation()
+  const [tracks, setTracks] = useState([]);
+  const { id } = useParams();
+  const { state } = useLocation();
 
-    const token = useContext(tokenCTX)
+  const token = useContext(tokenCTX);
 
     useEffect(() => {
         

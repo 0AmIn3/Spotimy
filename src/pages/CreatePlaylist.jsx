@@ -6,6 +6,7 @@ import Songs from "../components/Songs";
 import { FaExchangeAlt } from "react-icons/fa";
 // import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
+import SearchTracks from "../components/SearchTracks";
 const CreatePlaylist = () => {
   useEffect(() => {
     let body = document.body;
@@ -17,8 +18,7 @@ const CreatePlaylist = () => {
   const [file, setFile] = useState("");
   //   const [FixImg, setFixImg] = useState(0);
   const [modal, setModal] = useState(false);
-  const { search, setSearchResults } = useContext(searchCTX);
-  const [searchTracks, setSearchTracks] = useState([]);
+
 
   //   function ChangeImg() {
   //     if (FixImg) {
@@ -34,7 +34,7 @@ const CreatePlaylist = () => {
       let modals = document.querySelectorAll("#modal");
       let body = document.body;
 
-      body.style.overflow = "none";
+      body.style.overflow = "unset";
       modals.forEach((item) => {
         item.style.display = "none";
       });
@@ -62,33 +62,19 @@ const CreatePlaylist = () => {
       })
       .then((res) => setUser(res.data));
   }, []);
-  //   console.log(user.id);
   //GetUser
 
   //Search
-  useEffect(() => {
-    if (search.length > 0) {
-      axios
-        .get(
-          `https://api.spotify.com/v1/search?query=${search}&type=track&include_external=audio&market=UZ&locale=ru-RU%2Cru%3Bq%3D0.9%2Cen-US%3Bq%3D0.8%2Cen%3Bq%3D0.7&offset=5&limit=50`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then((res) => setSearchTracks(res.data.tracks.items));
-      //   console.log(searchTracks);
-    }
-  }, [search]);
+
   //Search
 
   let playForm = document.forms.playlistModal;
 
-  function SubmitFunc  (e){
+  function SubmitFunc(e) {
     e.preventDefault();
 
     let playlist = {
-      // id: len + 1,
-      img: file
+      public: true
     };
 
     let fmr = new FormData(playForm);
@@ -96,37 +82,43 @@ const CreatePlaylist = () => {
     fmr.forEach((value, key) => {
       playlist[key] = value;
     });
-
     console.log(playlist);
-    post()
-  };
+    post(playlist);
+  }
 
-  function post() {
-    console.log(token);
+
+  function post(settings) {
     axios
-      .post(`https://api.spotify.com/v1/users/${user.id}/playlists`, {
+      .post(
+        `https://api.spotify.com/v1/users/${user.id}/playlists`,
+        settings,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.id)
+        AddImg(res.data.id)
+      });
+
+  }
+  // spotify:track:6zDs6zI94L761vd0cVScTT
+  function AddImg (id){
+       axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks`,
+       {
+        "uris": ["spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]
+       },
+      {
         headers: {
           Authorization: `Bearer ${token}`,
-          //   "Content-Type": "application/json",
-          Accept: "application/json",
         },
-        data: {
-          name: "{{artist_name}} Mix",
-          public: false,
-        },
-      })
-      .then((res) => console.log(res));
+      }
+    )
+    .then((res) => console.log(res));
   }
-  //   console.log(new FileReader().readAsDataURL(file));
-  // const {
-  // 	register,
-  // 	handleSubmit,
-  // 	watch,
-  // 	formState: { errors },
-  // } = useForm();
-  // const onSubmit = async (data) => {
 
-  // };
   return (
     <div className="text-white">
       <div className="w-full flex  gap-8 h-[300px] text-white ">
@@ -165,38 +157,20 @@ const CreatePlaylist = () => {
         </div>
       </div>
       <div className="mt-10  border-t-2 bg-[#121212FF] border-neutral-400">
-        <div className=" mt-10 flex flex-col gap-7">
-          <h1 className=" text-3xl font-medium text-white">
-            Let's add something to your playlist
-          </h1>
-          <div className="inpSearch w-[468px] h-[40px] items-center gap-[14px] px-[16px] bg-[#2B2B2BFF] cursor-pointer rounded-[8px] overflow-hidden">
-            <img
-              src="../../public/Search.png"
-              alt=""
-              className="w-[32px] h-[32px] cursor-pointer  invert-[50%]"
-            />
-            <input
-              type="text"
-              name="search"
-              placeholder="Search for tracks and releases"
-              className="inp2 "
-              onKeyUp={(e) => setSearchResults(e.target.value)}
-            />
-          </div>
-
-          <div className=" h-fit min-h-[600px] w-full ">
-            {search.length > 0
-              ? searchTracks.map((item, idx) => (
-                  <Songs item={item} key={item.id} idx={idx} />
-                ))
-              : ""}
-          </div>
-        </div>
+       <SearchTracks/>
       </div>
 
       <div className="modal relative" id="modal">
-        <AiOutlineClose className=" absolute top-3 right-6" onClick={ChangeModal} size={30}/>
-        <form name="playlistModal" onSubmit={SubmitFunc} className="flex flex-col gap-4">
+        <AiOutlineClose
+          className=" absolute top-3 right-6"
+          onClick={ChangeModal}
+          size={30}
+        />
+        <form
+          name="playlistModal"
+          onSubmit={SubmitFunc}
+          className="flex flex-col gap-4"
+        >
           <h1 className=" text-3xl font-medium ">Сhanging information</h1>
           <div className="w-full flex  justify-between mt-5">
             <div className="w-[200px] h-[200px] selectPh bg-[#505050FF] relative">
@@ -210,7 +184,6 @@ const CreatePlaylist = () => {
               <div className=" selectPhitem absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 ">
                 <input
                   type="file"
-        
                   className="opacity-0 absolute top-0 left-0 w-full h-full"
                   onChange={(e) => {
                     let files = e.target.files;
@@ -242,7 +215,7 @@ const CreatePlaylist = () => {
                 type="text"
                 className="w-[100%] h-[140px] items-center gap-[14px] px-[16px] bg-[#2B2B2BFF] cursor-pointer rounded-[8px] overflow-hidden"
                 placeholder="Add description (optional)"
-                name="dis"
+                name="description"
                 id=""
               />
             </div>
