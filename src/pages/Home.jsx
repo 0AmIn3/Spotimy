@@ -8,7 +8,7 @@ import { tokenCTX } from "../contexts/tokenCTX";
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
-	const [myAlbom ,setMyAlbom] = useState([])
+	const [myAlbom, setMyAlbom] = useState([])
 
 	useEffect(() => {
 		axios
@@ -27,9 +27,12 @@ const Home = () => {
 
 	useEffect(() => {
 		axios.get("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5", {
-				headers: { Authorization: `Bearer ${token}` },
+			headers: { Authorization: `Bearer ${token}` },
+		})
+			.then((res) => {
+				setMyAlbom(res.data.playlists.items)
+				console.log(res.data.playlists.items)
 			})
-			.then((res) => console.log(res.data.playlists.items))
 	}, [])
 
 
@@ -52,21 +55,19 @@ const Home = () => {
 				Your top mixes
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-					{
-						myAlbom.map((item) => <GoToPlayList item={item} />)
-					}
-				
-				
+				{
+					myAlbom.map((item) => <GoToPlayList item={item} />)
+				}
+
+
 			</div>
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Made for you
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
+				{
+					myAlbom.map((item) => <GoToPlayList item={item} />)
+				}
 			</div>
 		</>
 	);
