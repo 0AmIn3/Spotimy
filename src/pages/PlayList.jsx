@@ -14,27 +14,33 @@ const PlayList = () => {
 
   const token = useContext(tokenCTX);
 
-    useEffect(() => {
-        
-        axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`,{
-            headers: {Authorization: `Bearer ${token}`}
-        })
-        .then(res => setTracks(res?.data?.items))
-        // temporary //
-        let body = document.body
-        body.style.backgroundImage = 'linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)'
-        body.style.backgroundRepeat = 'no-repeat'
-        // temporary //
-    }, [])
-    // console.log(tracks);
-    
-    return (
-        <>
-            <Playlist img={state?.img || state} />
-            <PlayListOptions />
-            <List arr={tracks} />
-        </>
-    );
-}
+
+  useEffect(() => {
+    axios
+      .get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setTracks(res?.data?.items);
+        console.log(res?.data?.items);
+      });
+    // temporary //
+    let body = document.body;
+    body.style.backgroundImage =
+      "linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)";
+    body.style.backgroundRepeat = "no-repeat";
+    // temporary //
+  }, []);
+  // console.log(tracks);
+
+  return (
+    <>
+      <Playlist img={state?.img || state} />
+      <PlayListOptions />
+      <List arr={tracks} />
+      <SearchTracks />
+    </>
+  );
+};
 
 export default PlayList;

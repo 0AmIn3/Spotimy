@@ -50,6 +50,13 @@ const Layout = () => {
 		})
 	}
 
+	// let calculateTime = (secs) => {
+	// 	let minutes = Math.floor(secs / 60);
+	// 	let seconds = Math.floor(secs % 60);
+	// 	let returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+	// 	return `${minutes}`:`${returnedSeconds}`;
+	// }
+
 	let setSearchResults = (text) => {
 		let uptadeText = text.toLowerCase().trim();
 		setSearch(uptadeText);

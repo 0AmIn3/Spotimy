@@ -6,6 +6,8 @@ import Slider from '@mui/material/Slider';
 
 const FooterCenter = () => {
 
+   
+
    let {play, changePlay, src} = useContext(musicCTX)
 
    useEffect(() => {
