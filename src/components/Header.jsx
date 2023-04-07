@@ -38,12 +38,12 @@ const Header = () => {
 				<img
 					src="../../public/back.png"
 					alt=""
-					className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"
+					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
 				<img
 					src="../../public/next.png"
 					alt=""
-					className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"
+					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
 				{pathname === '/search' ? (
 					<div className="inpSearch w-[468px] h-[52px] items-center gap-[14px] px-[16px] bg-[#fff] cursor-pointer rounded-[26px] overflow-hidden">
