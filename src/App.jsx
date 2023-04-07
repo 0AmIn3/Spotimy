@@ -7,6 +7,7 @@ import SearchPage from "./pages/SearchPage";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import PlayList from "./pages/PlayList"
+import Library from "./pages/Library"
 import CreatePlaylist from "./pages/CreatePlaylist";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/create" element={<CreatePlaylist/>}/>
+                <Route path="/library" element={<Library/>}/>
             </Route>
 		</Routes>
 	)
