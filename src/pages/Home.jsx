@@ -2,21 +2,35 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import GoToPlayList from "../components/GoToPlayList";
 import Items from "../components/Items";
+import Musicblock from "../components/Musicblock";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
+	const [myAlbom ,setMyAlbom] = useState([])
 
 	useEffect(() => {
 		axios
-			.get(`https://api.spotify.com/v1/users/31l55634sskmacncqzfimb573d34`, {
-				headers: { Authorization: `Bearer ${token}` },
+			.get('https://api.spotify.com/v1/me/playlists', {
+				headers: { Authorization: `Bearer ${token} ` },
 			})
-			.then((res) => console.log(res));
+			.then((res) => setMyPlaylists(res.data.items));
 	}, []);
 
+	useEffect(() => {
+		let body = document.body;
+		body.style.backgroundImage =
+			"linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)";
+		body.style.backgroundRepeat = "no-repeat";
+	}, []);
 
+	useEffect(() => {
+		axios.get("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5", {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+			.then((res) => console.log(res.data.playlists.items))
+	}, [])
 
 
 	return (
@@ -38,11 +52,11 @@ const Home = () => {
 				Your top mixes
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
+					{
+						myAlbom.map((item) => <GoToPlayList item={item} />)
+					}
+				
+				
 			</div>
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Made for you
