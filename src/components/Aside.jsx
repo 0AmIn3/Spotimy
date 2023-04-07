@@ -2,6 +2,10 @@ import { NavLink } from "react-router-dom";
 import SpotifyLogo from "../../public/images/Spotify_Logo_CMYK_White.png"
 
 const Aside = () => {
+
+  // const {playlist} = useContext(myPlaylistCTX)
+  // const navigate = useNavigate()
+   
   return (
     <aside className="w-[11.9%] h-full  flex flex-col gap-[16px] px-[25px] pt-[25px] bg-[#000000] fixed left-0 bottom-0">
      

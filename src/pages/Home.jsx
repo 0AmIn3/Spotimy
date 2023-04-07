@@ -3,18 +3,23 @@ import { useContext, useEffect, useState } from "react";
 import GoToPlayList from "../components/GoToPlayList";
 import Items from "../components/Items";
 import Musicblock from "../components/Musicblock";
+import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
+	const { setPlaylist } = useContext(myPlaylistCTX)
 
 	useEffect(() => {
 		axios
 			.get(`https://api.spotify.com/v1/me/playlists`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
-			.then((res) => setMyPlaylists(res.data.items));
+			.then((res) => {
+				setMyPlaylists(res.data.items)
+				setPlaylist(res.data.items)
+			});
 	}, []);
 
 	useEffect(() => {

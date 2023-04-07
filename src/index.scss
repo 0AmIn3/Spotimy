@@ -55,7 +55,7 @@
 
 .hovercont {
   transition: 0.3s;
-   
+   overflow: unset;
   &:hover .playhover {
     opacity: 1;
     bottom: 0px;
