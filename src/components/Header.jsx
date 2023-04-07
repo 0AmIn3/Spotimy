@@ -1,23 +1,39 @@
-
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link , useLocation} from "react-router-dom";
 import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
 const Header = () => {
-
+	const [user, setUser] = useState('')
+	window.onscroll = () => {
+		let header = document.querySelector('header')
+		let val = window.scrollY
+		if(val === 0) {
+		header.style.background = `transparent`
+		} else {
+		header.style.background = `#000000${val * .3}`
+		}
+	}
 	const token = useContext(tokenCTX)
 	const {search, setSearchResults} = useContext(searchCTX)
 	useEffect(() => {
-	    axios.get('https://api.spotify.com/v1/me', {
-	       headers: {Authorization: `Bearer ${token}`}
-	    }).then(res => {})
+			axios
+			  .get(`https://api.spotify.com/v1/me`, {
+				headers: { Authorization: `Bearer ${token}` },
+			  })
+			  .then((res) => {
+				  setUser(res.data)
+				  console.log(res.data);
+			  });
 	}, [])
 	const {pathname} = useLocation();
+	const localClear = () => {
+		localStorage.clear()
+	}
 
 	return (
-		<header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
+		<header className="w-[82%] h-[80px] fixed right-0 top-0 px-[2.3%] flex items-center duration-[200ms] justify-between z-10">
 			<div className="flex items-center gap-[22px]">
 				<img
 					src="../../public/back.png"
@@ -49,12 +65,12 @@ const Header = () => {
 				>
 					<span className="sr-only">Open user menu</span>
 					<img
-						src="../../public/dava.png"
+						src={user !== '' ? user?.images[0]?.url : '../../dava.png'}
 						alt=""
-						className="mr-2 w-[34px] h-[34px] rounded-full avatar_layout"
+						className="mr-2 w-[34px] h-[34px] rounded-full avatar_layout davaImg"
 					/>
 					<span className="text-[#fff] font-Manrope text-[18px] font-bold">
-						davadirect3
+						{user.display_name}
 					</span>
 					<img
 						src="../../public/open.png"
@@ -99,13 +115,12 @@ const Header = () => {
 							</a>
 						</li>
 					</ul>
-					<div className="py-1">
-						<a
-							href="#"
+					<div className="py-1" onClick={localClear}>
+						<p 
 							className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
 						>
 							Sign out
-						</a>
+						</p>
 					</div>
 				</div>
 			</div>
