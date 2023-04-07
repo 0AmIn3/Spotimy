@@ -3,9 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import { Link , useLocation} from "react-router-dom";
 import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
+import { useHttp } from "../hook/http.hook";
 
 const Header = ({goBack, next}) => {
 	const [user, setUser] = useState('')
+	const {loading, error, request} = useHttp()
+
 	window.onscroll = () => {
 		let header = document.querySelector('header')
 		let val = window.scrollY
@@ -15,21 +18,22 @@ const Header = ({goBack, next}) => {
 		header.style.background = `#000000${val * .3}`
 		}
 	}
-	const token = useContext(tokenCTX)
 	const {search, setSearchResults} = useContext(searchCTX)
 	useEffect(() => {
-			axios
-			  .get(`https://api.spotify.com/v1/me`, {
-				headers: { Authorization: `Bearer ${token}` },
-			  })
-			  .then((res) => {
-				  setUser(res.data)
-				  console.log(res.data);
-			  });
+		request(`https://api.spotify.com/v1/me`)
+			.then(res => console.log(res))
 	}, [])
 	const {pathname} = useLocation();
 	const localClear = () => {
 		localStorage.clear()
+	}
+
+	if(loading) {
+		return <h1>loading...</h1>
+	}
+
+	if(error) {
+		return <h1>Error something went wrong</h1>
 	}
 
 	return (
