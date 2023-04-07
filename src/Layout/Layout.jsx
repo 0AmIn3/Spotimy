@@ -102,9 +102,9 @@ const Layout = () => {
 						<openBigImgCTX.Provider value={{changeOpen, open}}>
 					<div className="flex relative">
 						<Aside />
-						<div className="w-[77.2%] relative ml-[20.2%] ">
+						<div className="w-[85.2%] relative ml-[13.4%] ">
 							<Header />
-							<main className="mt-[110px] mb-[150px] min-h-[100vh]">
+							<main className="mt-[85px] mb-[150px] min-h-[100vh]">
 								<Outlet />
 							</main>
 							<Footer />

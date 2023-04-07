@@ -10,11 +10,11 @@ const FooterLeft = () => {
    console.log(info);
 
    return ( 
-      <div className="itemscenter absolute left-0 flex items-center gap-[22px] overflow-hidden">
-               <div onClick={changeOpen} className="h-[72px] w-[72px] bg-contain bg-center bg-no-repeat cursor-pointer" style={{backgroundImage:  `url('${info.img}')`, display: open ? 'none' : 'block'}}></div>
+      <div className="itemscenter absolute left-0 flex items-center gap-[14px] overflow-hidden">
+               <div onClick={changeOpen} className="h-[56px] w-[56px] bg-contain bg-center bg-no-repeat cursor-pointer" style={{backgroundImage:  `url('${info.img}')`, display: open ? 'none' : 'block'}}></div>
                <div className="flex flex-col gap-[2px]">
-                  <p className="text-[18px] font-Manrope text-[#fff]">{info.title}</p>
-                  <p className="font-Manrope text-[#B3B3B3]">{info.artist}</p>
+                  <p className="text-[15px] font-semibold font-Manrope text-[#fff]">{info.title}</p>
+                  <p className="text-[12px] font-Manrope text-[#B3B3B3]">{info.artist}</p>
                </div>
             </div>
     );

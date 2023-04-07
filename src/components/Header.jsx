@@ -17,17 +17,17 @@ const Header = () => {
 	const {pathname} = useLocation();
 
 	return (
-		<header className="w-[77.2%] h-[80px] fixed flex items-center justify-between z-10">
-			<div className="flex items-center gap-[22px]">
+		<header className="w-[85.2%] h-[65px] fixed flex items-center justify-between z-10">
+			<div className="flex items-center gap-[16px]">
 				<img
 					src="../../public/back.png"
 					alt=""
-					className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"
+					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
 				<img
 					src="../../public/next.png"
 					alt=""
-					className="w-[40px] h-[40px] cursor-pointer duration-[500ms] hover:invert-[8%]"
+					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
 				{pathname === '/search' ? (
 					<div className="inpSearch w-[468px] h-[52px] items-center gap-[14px] px-[16px] bg-[#fff] cursor-pointer rounded-[26px] overflow-hidden">
