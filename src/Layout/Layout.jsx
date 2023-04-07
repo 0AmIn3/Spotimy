@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Aside from "../components/Aside";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -24,6 +24,15 @@ const Layout = () => {
 		title: "Play It Safe",
 		artist: "Julia Wolf",
 	});
+
+	const navigate = useNavigate()
+
+	const goBack = () => {
+		navigate(-1)
+	}
+	const next = () => {
+		navigate(1)
+	}
 
 	const changeOpen = () => {
 		setOpen(!open);
@@ -108,7 +117,7 @@ const Layout = () => {
 								<div className="flex relative">
 									<Aside />
 									<div className="w-[77.2%] relative ml-[20.2%] ">
-										<Header />
+										<Header goBack={goBack} next={next} />
 										<main className="mt-[110px] mb-[150px] min-h-[100vh]">
 											<Outlet />
 										</main>

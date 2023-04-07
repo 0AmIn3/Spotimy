@@ -4,7 +4,7 @@ import { Link , useLocation} from "react-router-dom";
 import { searchCTX } from "../contexts/searchCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 
-const Header = () => {
+const Header = ({goBack, next}) => {
 	const [user, setUser] = useState('')
 	window.onscroll = () => {
 		let header = document.querySelector('header')
@@ -36,11 +36,13 @@ const Header = () => {
 		<header className="w-[82%] h-[80px] fixed right-0 top-0 px-[2.3%] flex items-center duration-[200ms] justify-between z-10">
 			<div className="flex items-center gap-[22px]">
 				<img
+					onClick={goBack}
 					src="../../public/back.png"
 					alt=""
 					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
 				/>
 				<img
+					onClick={next}
 					src="../../public/next.png"
 					alt=""
 					className="w-[32px] h-[32px] cursor-pointer duration-[500ms] hover:invert-[8%]"
