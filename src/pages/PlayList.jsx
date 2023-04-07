@@ -5,36 +5,43 @@ import List from "../components/List";
 import Playlist from "../components/Playlist";
 import PlayListOptions from "../components/PlayListOptions";
 import { tokenCTX } from "../contexts/tokenCTX";
+import SearchTracks from "../components/SearchTracks";
 
 const PlayList = () => {
-    const [tracks, setTracks] = useState([])
-    const {id} = useParams()
-    console.log(id);
-    const {state} = useLocation()
 
-    const token = useContext(tokenCTX)
+  const [tracks, setTracks] = useState([]);
+  const { id } = useParams();
+  const { state } = useLocation();
 
-    useEffect(() => {
-        
-        axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`,{
-            headers: {Authorization: `Bearer ${token}`}
-        })
-        .then(res => setTracks(res?.data?.items))
-        // temporary //
-        let body = document.body
-        body.style.backgroundImage = 'linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)'
-        body.style.backgroundRepeat = 'no-repeat'
-        // temporary //
-    }, [])
-    // console.log(tracks);
-    
-    return (
-        <>
-            <Playlist img={state?.img || state} />
-            <PlayListOptions />
-            <List arr={tracks} />
-        </>
-    );
-}
+  const token = useContext(tokenCTX);
+
+
+  useEffect(() => {
+    axios
+      .get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setTracks(res?.data?.items);
+        console.log(res?.data?.items);
+      });
+    // temporary //
+    let body = document.body;
+    body.style.backgroundImage =
+      "linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)";
+    body.style.backgroundRepeat = "no-repeat";
+    // temporary //
+  }, []);
+  // console.log(tracks);
+
+  return (
+    <>
+      <Playlist img={state?.img} />
+      <PlayListOptions />
+      <List arr={tracks} />
+      <SearchTracks />
+    </>
+  );
+};
 
 export default PlayList;
