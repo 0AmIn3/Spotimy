@@ -8,14 +8,15 @@ import { tokenCTX } from "../contexts/tokenCTX";
 import SearchTracks from "../components/SearchTracks";
 
 const PlayList = () => {
+
   const [tracks, setTracks] = useState([]);
   const { id } = useParams();
   const { state } = useLocation();
 
   const token = useContext(tokenCTX);
 
-  useEffect(() => {
 
+  useEffect(() => {
     axios
       .get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
         headers: { Authorization: `Bearer ${token}` },
