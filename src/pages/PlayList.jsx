@@ -20,7 +20,6 @@ const PlayList = () => {
     request(`https://api.spotify.com/v1/playlists/${id}/tracks`)
     .then((res) => {
       setTracks(res?.items);
-      console.log(res?.items);
     });
 
     // temporary //

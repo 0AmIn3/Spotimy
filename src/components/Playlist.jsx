@@ -2,7 +2,6 @@
 
 
 const Playlist = ({img}) => {
-    console.log(img);
     return (
         <div className=" m-auto mb-[30px]">
 
