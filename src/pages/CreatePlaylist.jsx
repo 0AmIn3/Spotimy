@@ -7,6 +7,7 @@ import { FaExchangeAlt } from "react-icons/fa";
 // import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import SearchTracks from "../components/SearchTracks";
+import { useHttp } from "../hook/http.hook";
 const CreatePlaylist = () => {
   useEffect(() => {
     let body = document.body;
@@ -18,6 +19,7 @@ const CreatePlaylist = () => {
   const [file, setFile] = useState("");
   //   const [FixImg, setFixImg] = useState(0);
   const [modal, setModal] = useState(false);
+  const { loading, error, request } = useHttp()
 
 
   //   function ChangeImg() {
@@ -56,11 +58,8 @@ const CreatePlaylist = () => {
 
   //GetUser
   useEffect(() => {
-    axios
-      .get(`https://api.spotify.com/v1/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setUser(res.data));
+    request(`https://api.spotify.com/v1/me`)
+      .then((res) => setUser(res));
   }, []);
   //GetUser
 
@@ -100,7 +99,7 @@ const CreatePlaylist = () => {
       )
       .then((res) => {
         console.log(res.data.id)
-        AddImg(res.data.id)
+        AddImg(res.data.id) 
       });
 
   }

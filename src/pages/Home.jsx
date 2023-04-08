@@ -5,20 +5,18 @@ import Items from "../components/Items";
 import Musicblock from "../components/Musicblock";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
+import { useHttp } from "../hook/http.hook";
 
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
 	const [myAlbom, setMyAlbom] = useState([])
+	const { loading, error, request } = useHttp()
 
 	useEffect(() => {
-		axios
-			.get('https://api.spotify.com/v1/me/playlists', {
-				headers: { Authorization: `Bearer ${token} ` },
-			})
+		request('https://api.spotify.com/v1/me/playlists')
 			.then((res) => {
-				setMyPlaylists(res.data.items)
-				setPlaylist(res.data.items)
+				setMyPlaylists(res.items)
 			});
 	}, []);
 
@@ -30,12 +28,10 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
-		axios.get("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5", {
-			headers: { Authorization: `Bearer ${token}` },
-		})
+		request("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5")
 			.then((res) => {
-				setMyAlbom(res.data.playlists.items)
-				console.log(res.data.playlists.items)
+				setMyAlbom(res.playlists.items)
+				console.log(res.playlists.items)
 			})
 	}, [])
 

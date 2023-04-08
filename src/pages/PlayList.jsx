@@ -6,25 +6,23 @@ import Playlist from "../components/Playlist";
 import PlayListOptions from "../components/PlayListOptions";
 import { tokenCTX } from "../contexts/tokenCTX";
 import SearchTracks from "../components/SearchTracks";
+import { useHttp } from "../hook/http.hook";
 
 const PlayList = () => {
 
   const [tracks, setTracks] = useState([]);
   const { id } = useParams();
   const { state } = useLocation();
-
-  const token = useContext(tokenCTX);
+  const { loading, error, request } = useHttp()
 
 
   useEffect(() => {
-    axios
-      .get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setTracks(res?.data?.items);
-        console.log(res?.data?.items);
-      });
+    request(`https://api.spotify.com/v1/playlists/${id}/tracks`)
+    .then((res) => {
+      setTracks(res?.items);
+      console.log(res?.items);
+    });
+
     // temporary //
     let body = document.body;
     body.style.backgroundImage =
@@ -32,7 +30,6 @@ const PlayList = () => {
     body.style.backgroundRepeat = "no-repeat";
     // temporary //
   }, []);
-  // console.log(tracks);
 
   return (
     <>

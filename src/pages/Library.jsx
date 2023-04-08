@@ -3,10 +3,15 @@ import Categories from "../childs/Categories";
 import { BsPlayCircleFill } from "react-icons/bs";
 
 const Library = () => {
-  useEffect(() => {
-    let inpSearch = document.querySelector('.inpSearch')
-		inpSearch.style.display = 'none'
-  })
+
+    let body = document.body;
+    body.style.backgroundImage = "linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)";
+    body.style.backgroundRepeat = "no-repeat";
+
+  body.style.backgroundImage =
+    "linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%)";
+  body.style.backgroundRepeat = "no-repeat";
+
   const flex = [
     {
       name: "Afro “Select” Vi...",
@@ -36,7 +41,7 @@ const Library = () => {
   ];
 
   return (
-    <div className="w-full bg-[#121212] ">
+    <div className="w-full ">
       <div className="p-[25px]">
         <h1 className="text-[#FFF] font-[700] text-[30px]">Playlists</h1>
 
@@ -121,7 +126,7 @@ const Library = () => {
                 <div className="w-full pt-[30px] h-[30%]">
                   <p className="font-bold text-[#FFF] text-[22px]">Anime Lofi</p>
                   <p className="font-[450] text-[18px] text-[#B3B3B3] pt-[8px] ">
-                  Experience the best Anime moments aga...
+                    Experience the best Anime moments aga...
                   </p>
                 </div>
               </div>
@@ -162,7 +167,7 @@ const Library = () => {
 
         </div>
       </div>
-      
+
     </div>
   );
 };
