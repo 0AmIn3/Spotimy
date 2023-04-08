@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Aside from "../components/Aside";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -7,9 +7,9 @@ import { searchCTX } from "../contexts/searchCTX";
 import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 import { musicCTX } from "../contexts/musicCTX";
-import {	musicInfoCTX } from '../contexts/musicInfoCTX'
-import {	openBigImgCTX } from '../contexts/openBigImgCTX'
-import {	myPlaylistCTX } from '../contexts/myPlaylistsCTX'
+import { musicInfoCTX } from "../contexts/musicInfoCTX";
+import { openBigImgCTX } from "../contexts/openBigImgCTX";
+import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 
 const Layout = () => {
 	const [token, setToken] = useState("");
@@ -17,17 +17,26 @@ const Layout = () => {
 	const [play, setPlay] = useState(false);
 	const [id, setId] = useState("");
 	const [src, setSrc] = useState("");
-   const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(false);
 	const [info, setInfo] = useState({
-		img: 'https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314',
-		imgbig: 'https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314',
-		title: 'Play It Safe',
-		artist: 'Julia Wolf'
-	})
+		img: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
+		imgbig: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
+		title: "Play It Safe",
+		artist: "Julia Wolf",
+	});
+
+	const navigate = useNavigate()
+
+	const goBack = () => {
+		navigate(-1)
+	}
+	const next = () => {
+		navigate(1)
+	}
 
 	const changeOpen = () => {
-		setOpen(!open)
-	}
+		setOpen(!open);
+	};
 	const changePlay = () => {
 		setPlay(!play);
 	};
@@ -46,15 +55,15 @@ const Layout = () => {
 			img: songimg,
 			imgbig: songimgbig,
 			title: songtitle,
-			artist: songartist
-		})
-	}
+			artist: songartist,
+		});
+	};
 
 	let setSearchResults = (text) => {
 		let uptadeText = text.toLowerCase().trim();
 		setSearch(uptadeText);
 	};
-	const [playlist, setPlaylist] = useState([])
+	const [playlist, setPlaylist] = useState([]);
 	const { client_id, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE } =
 		useContext(spotify);
 
@@ -100,19 +109,21 @@ const Layout = () => {
 						src,
 					}}
 				>
-					<musicInfoCTX.Provider value={{changeInfo, info}}>
-						<openBigImgCTX.Provider value={{changeOpen, open}}>
-							<myPlaylistCTX.Provider value={{setPlaylist, playlist}}>
-					<div className="flex relative">
-						<Aside />
-						<div className="w-[85.2%] relative ml-[13.4%] ">
-							<Header />
-							<main className="mt-[85px] mb-[150px] min-h-[100vh]">
-								<Outlet />
-							</main>
-							<Footer />
-						</div>
-					</div>
+					<musicInfoCTX.Provider value={{ changeInfo, info }}>
+						<openBigImgCTX.Provider value={{ changeOpen, open }}>
+							<myPlaylistCTX.Provider
+								value={{ setPlaylist, playlist }}
+							>
+								<div className="flex relative">
+									<Aside />
+									<div className="w-[77.2%] relative ml-[20.2%] ">
+										<Header goBack={goBack} next={next} />
+										<main className="mt-[110px] mb-[150px] min-h-[100vh]">
+											<Outlet />
+										</main>
+										<Footer />
+									</div>
+								</div>
 							</myPlaylistCTX.Provider>
 						</openBigImgCTX.Provider>
 					</musicInfoCTX.Provider>
