@@ -8,10 +8,11 @@ import { FaExchangeAlt } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import SearchTracks from "../components/SearchTracks";
 import { useHttp } from "../hook/http.hook";
+import { useLocation, useNavigate } from "react-router-dom";
 const CreatePlaylist = () => {
   useEffect(() => {
     let body = document.body;
-    body.style.background = "#292929FF";
+    body.style.background = "#121212FF";
   });
   const token = useContext(tokenCTX);
   const [NewPlaylists, setNewPlaylists] = useState([]);
@@ -19,9 +20,8 @@ const CreatePlaylist = () => {
   const [file, setFile] = useState("");
   //   const [FixImg, setFixImg] = useState(0);
   const [modal, setModal] = useState(false);
-  const { loading, error, request } = useHttp()
-
-
+  const { loading, error, request } = useHttp();
+  const navigate = useNavigate()
   //   function ChangeImg() {
   //     if (FixImg) {
   //       let changeIm = document.querySelector(".changeImg");
@@ -58,8 +58,7 @@ const CreatePlaylist = () => {
 
   //GetUser
   useEffect(() => {
-    request(`https://api.spotify.com/v1/me`)
-      .then((res) => setUser(res));
+    request(`https://api.spotify.com/v1/me`).then((res) => setUser(res));
   }, []);
   //GetUser
 
@@ -73,7 +72,7 @@ const CreatePlaylist = () => {
     e.preventDefault();
 
     let playlist = {
-      public: true
+      public: true,
     };
 
     let fmr = new FormData(playForm);
@@ -83,44 +82,52 @@ const CreatePlaylist = () => {
     });
     console.log(playlist);
     post(playlist);
-  }
+   
 
+  }
 
   function post(settings) {
     axios
+      .post(`https://api.spotify.com/v1/users/${user.id}/playlists`, settings, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.id);
+        // AddImg(res.data.id);
+        navigate(`/playlist/${res.data.id}`)
+        
+      });
+    // request(`https://api.spotify.com/v1/users/${user.id}/playlists` , "POST" , settings).then((res) => {
+    //   console.log(res.data.id);
+    //   AddImg(res.data.id);
+    // });
+    
+  }
+  // spotify:track:6zDs6zI94L761vd0cVScTT
+  function AddImg(id) {
+    axios
       .post(
-        `https://api.spotify.com/v1/users/${user.id}/playlists`,
-        settings,
+        `https://api.spotify.com/v1/playlists/${id}/tracks`,
+        {
+          uris: [
+            "spotify:track:1301WleyT98MSxVHPZCA6M",
+            "spotify:episode:512ojhOuo1ktJprKbVcKyQ",
+          ],
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       )
-      .then((res) => {
-        console.log(res.data.id)
-        AddImg(res.data.id) 
-      });
-
-  }
-  // spotify:track:6zDs6zI94L761vd0cVScTT
-  function AddImg (id){
-       axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks`,
-       {
-        "uris": ["spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]
-       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((res) => console.log(res));
+      .then((res) => console.log(res));
   }
 
   return (
     <div className="text-white">
-      <div className="w-full flex  gap-8 h-[300px] text-white ">
+      <div className="w-full flex mb-14  gap-8 h-[300px] text-white ">
         <div
           className="w-[300px] selectPh bg-[#505050FF] relative"
           onClick={ChangeModal}
@@ -136,7 +143,7 @@ const CreatePlaylist = () => {
         <div className=" flex flex-col justify-between">
           <p className=" text-base font-medium">PUBLIC PLAYLIST</p>
           <h1
-            className=" text-9xl font-black cursor-pointer"
+            className=" text-7xl font-black cursor-pointer"
             onClick={ChangeModal}
           >
             MY PLAYLIST
@@ -155,8 +162,8 @@ const CreatePlaylist = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10  border-t-2 bg-[#121212FF] border-neutral-400">
-       <SearchTracks/>
+      <div className="mt-10  border-t-2 bg-[#121212FF] border-[#323232]">
+        <SearchTracks />
       </div>
 
       <div className="modal relative" id="modal">

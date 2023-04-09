@@ -21,7 +21,7 @@ const Header = ({goBack, next}) => {
 	const {search, setSearchResults} = useContext(searchCTX)
 	useEffect(() => {
 		request(`https://api.spotify.com/v1/me`)
-			.then(res => console.log(res))
+			.then(res => setUser(res))
 	}, [])
 	const {pathname} = useLocation();
 	const localClear = () => {

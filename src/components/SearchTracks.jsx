@@ -39,7 +39,7 @@ const SearchTracks = () => {
       <div className=" h-fit min-h-[600px] w-full ">
         {search.length > 0
           ? searchTracks.map((item, idx) => (
-            <Songs item={item} key={item.id} idx={idx} />
+            <Songs item={item} key={item.id} idx={idx} ChangeAdd={true} />
           ))
           : ""}
       </div>

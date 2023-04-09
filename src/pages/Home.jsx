@@ -54,7 +54,7 @@ const Home = () => {
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
 				{
-					myAlbom.map((item) => <GoToPlayList item={item} />)
+					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
 				}
 
 
@@ -64,7 +64,7 @@ const Home = () => {
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
 				{
-					myAlbom.map((item) => <GoToPlayList item={item}  />)
+					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
 				}
 			</div>
 		</>

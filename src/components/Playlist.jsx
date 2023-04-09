@@ -20,13 +20,7 @@ const Playlist = ({ img, item, like, name }) => {
             .then((res) => setUser(res));
     }, []);
 
-    useEffect(() => {
-        request('https://api.spotify.com/v1/me/playlists')
-            .then((res) => {
-                setMyPlaylists(res?.items[0]?.name)
-            });
-    }, []);
-
+ 
     return (
         <div className=" m-auto mb-[30px] flex">
             <img className={like ? 'likeImg' : "albumImg h-[230px]"} src={img} />
@@ -36,7 +30,7 @@ const Playlist = ({ img, item, like, name }) => {
 
                 <div className="flex flex-col justify-center text-[white]">
                     <p className=" text-[18px] font-bold">Playlist</p>
-                    <h1 className="mb-[10px] text-[90px] font-bold ">{like ? `Liked Songs` : MyPlaylists}</h1>
+                    <h1 className="mb-[10px] text-[90px] font-bold ">{like ? `Liked Songs` : name}</h1>
                 </div>
 
                 <div className="flex items-center  text-base font-bold gap-2 text-[white]">

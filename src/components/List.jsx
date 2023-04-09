@@ -10,7 +10,7 @@ import Songs from "./Songs";
 import "./../style.scss";
 
 
-export default function List({arr}) {
+export default function List({arr }) {
 	return (
 		<div className="mt-[20px]">
 			<TableContainer className="table-bg px-1" component={Paper}>
@@ -32,7 +32,7 @@ export default function List({arr}) {
 					</TableHead>
 					<TableBody className="px-2">
 						{arr.map((item, idx) => (
-							<Songs item={item.track} key={item.id} idx={idx} />
+							<Songs item={item.track} key={idx} idx={idx}  />
 						))}
 					</TableBody>
 				</Table>
