@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { useEffect, useState } from "react";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
@@ -6,15 +6,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { musicCTX } from '../contexts/musicCTX';
+
 
 const PlayListOptions = () => {
-
+  let { play, changePlay, src } = useContext(musicCTX)
+	const [isTurn, setIsTurn] = useState(play);
   const [age, setAge] = useState('');
-  const [play, setPlay] = useState(false)
+  const [player, setPlayer] = useState(false)
 
-  useEffect(() => {
-    let audio = document.querySelector('audio')
-    play ? audio.play() : audio.pause()
+  // useEffect(() => {
+  //   let audio = document.querySelector('audio')
+  //   player ? audio.player() : audio.pause()
+  // }, [player])
+
+  useEffect(()=> {
+    setIsTurn(play)
   }, [play])
 
   const handleChange = (event) => {
@@ -26,8 +33,8 @@ const PlayListOptions = () => {
   return (
     <div className="flex justify-between px-1 select-none">
       <div className=" flex gap-6 items-center">
-        <div className="flex items-center w-[55px] rounded-full h-[55px] bg-[#65D36E] cursor-pointerr justify-center" onClick={() => setPlay(!play)}>
-          {play ? <PauseIcon sx={{ width: "35px", height: '35px' }} /> : <PlayArrowIcon sx={{ width: "35px", height: '35px' }} />}
+        <div className="flex items-center w-[55px] rounded-full h-[55px] bg-[#65D36E] cursor-pointerr justify-center" onClick={() => setPlayer(!player)}>
+          {player ? <PauseIcon sx={{ width: "35px", height: '35px' }} /> : <PlayArrowIcon sx={{ width: "35px", height: '35px' }} />}
 
         </div>
         <div className="flex items-center gap-4">

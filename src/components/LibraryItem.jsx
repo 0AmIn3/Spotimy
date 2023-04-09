@@ -1,11 +1,12 @@
 
 import { BsPlayCircleFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const LibraryItems = ({ name, img, id, owner }) => {
+    
+    const { state } = useLocation();
     return (
-        <Link to={`/playlist/${id}`}>
+        <Link to={`/playlist/${id}`} state={{ img }}>
             <div className="w-[224px] select-none forTr h-[324px] forHv ease-in hover:bg-[#2a2a2a] cursor-pointer pl-[20px] pr-[12px] pt-[20px] bg-[#1B1B1B] rounded-[8px] ">
                 <div className="w-[95%] h-[95%]">
                     <div className="w-full h-[60%] ">

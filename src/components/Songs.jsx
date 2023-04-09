@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // import { useState } from 'react';
 import TableCell from "@mui/material/TableCell";
@@ -12,12 +13,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Songs = ({ item, idx }) => {
-	const [isTurn, setIsTurn] = useState(false);
 	const { changeSrc, changeId, changePlayTrue, id } = useContext(musicCTX);
 	const { changeInfo } = useContext(musicInfoCTX);
-
+	const [isLike, setIsLike] = useState(false)
+	const [Likesongs, setLikesongs] = useState([])
 	const paramsID = useParams();
 	const token = useContext(tokenCTX);
+
+	let locData = JSON.parse(localStorage.getItem("likesongs"));
+
 
 	function AddTrank(trackuri) {
 		axios
@@ -36,8 +40,7 @@ const Songs = ({ item, idx }) => {
 			.then((res) => console.log(res));
 	}
 	function DelTrank(trackuri) {
-		axios
-			.delete(
+		axios.delete(
 				`https://api.spotify.com/v1/playlists/${id}/tracks`,
 				{ tracks: [{ uri: "spotify:track:6zDs6zI94L761vd0cVScTT" }] },
 				{
@@ -48,11 +51,19 @@ const Songs = ({ item, idx }) => {
 			)
 			.then((res) => console.log(res));
 	}
+
+	if(isLike){
+		localStorage.setItem("likesongs", JSON.stringify(item))
+	}
+
+
+
 	return (
 		<TableRow
-			style={{ width: "100%" }}
+			style={{ width: "100%", userSelect:'none' }}
 			onClick={() => {
-					changeSrc(item.preview_url),
+				
+				changeSrc(item.preview_url),
 					changeId(item.id);
 				changePlayTrue();
 				changeInfo(
@@ -61,6 +72,7 @@ const Songs = ({ item, idx }) => {
 					item?.name,
 					item?.album?.artists[0].name
 				);
+
 			}}
 			className="body-row"
 		>
@@ -87,7 +99,7 @@ const Songs = ({ item, idx }) => {
 			<TableCell className="text-[14px]" align="left">
 				{item.name}
 			</TableCell>
-			<TableCell align="left"></TableCell>
+			<TableCell onClick={() => setIsLike(!isLike)} align="left">{isLike ? <AiFillHeart color="#63CF6C" /> : <AiOutlineHeart />}</TableCell>
 			<TableCell align="left">2 : 12</TableCell>
 		</TableRow>
 	);
