@@ -31,10 +31,8 @@ const Home = () => {
 		request("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5")
 			.then((res) => {
 				setMyAlbom(res.playlists.items)
-				console.log(res.playlists.items)
 			})
 	}, [])
-
 
 	return (
 		<>
@@ -66,7 +64,7 @@ const Home = () => {
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
 				{
-					myAlbom.map((item) => <GoToPlayList item={item} />)
+					myAlbom.map((item) => <GoToPlayList item={item}  />)
 				}
 			</div>
 		</>

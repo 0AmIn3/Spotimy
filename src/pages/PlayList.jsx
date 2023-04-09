@@ -4,7 +4,6 @@ import { useLocation, useParams } from "react-router-dom";
 import List from "../components/List";
 import Playlist from "../components/Playlist";
 import PlayListOptions from "../components/PlayListOptions";
-import { tokenCTX } from "../contexts/tokenCTX";
 import SearchTracks from "../components/SearchTracks";
 import { useHttp } from "../hook/http.hook";
 
@@ -19,9 +18,10 @@ const PlayList = () => {
   useEffect(() => {
     request(`https://api.spotify.com/v1/playlists/${id}/tracks`)
     .then((res) => {
-      setTracks(res?.items);
-      console.log(res?.items);
+      setTracks(res?.items);  
+      console.log(res);
     });
+
 
     // temporary //
     let body = document.body;
@@ -33,7 +33,7 @@ const PlayList = () => {
 
   return (
     <>
-      <Playlist img={state?.img} />
+      <Playlist img={state?.img} item={tracks}  />
       <PlayListOptions />
       <List arr={tracks} />
       <SearchTracks />

@@ -32,3 +32,12 @@
     background-color: transparent !important;
     box-shadow: none !important;
 }
+
+.likeImg {
+    width: 230px;
+    height: 230px;
+    background-image: url(../public/images/likePic.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
