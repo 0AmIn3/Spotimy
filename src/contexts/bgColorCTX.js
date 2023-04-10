@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const bgColorCTX = createContext()
+export const bgColorCTX = createContext('')

@@ -10,7 +10,7 @@ import Songs from "./Songs";
 import "./../style.scss";
 
 
-export default function List({arr }) {
+export default function List({arr}) {
 	return (
 		<div className="mt-[20px]">
 			<TableContainer className="table-bg px-1" component={Paper}>

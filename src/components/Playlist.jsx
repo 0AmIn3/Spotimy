@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useHttp } from "../hook/http.hook";
 import { useLocation } from "react-router-dom";
+import { bgColorCTX } from "../contexts/bgColorCTX";
+import { getAverageRGB } from "../hook/getImageColor";
 
 
 
@@ -8,10 +10,11 @@ const Playlist = ({ img, item, like, name }) => {
 
 
 
-
     const [user, setUser] = useState("");
     const { loading, error, request } = useHttp()
     const [MyPlaylists, setMyPlaylists] = useState([]);
+    const imgEl = useRef(null);
+    const {setBg} = useContext(bgColorCTX)
 
 
     //GetUser
@@ -20,10 +23,14 @@ const Playlist = ({ img, item, like, name }) => {
             .then((res) => setUser(res));
     }, []);
 
+    useEffect(() => {
+        setBg(getAverageRGB(imgEl.current))
+    },[imgEl.current])
+
  
     return (
         <div className=" m-auto mb-[30px] flex">
-            <img className={like ? 'likeImg' : "albumImg h-[230px]"} src={img} />
+            <img ref={imgEl} className={like ? 'likeImg' : "albumImg h-[230px] imgBg"} src={img} />
 
             <div className="ml-[30px]">
 

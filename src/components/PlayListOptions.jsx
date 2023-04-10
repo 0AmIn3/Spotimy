@@ -32,7 +32,7 @@ const PlayListOptions = () => {
 
   return (
     <div className="flex justify-between px-1 select-none">
-      <div className=" flex gap-6 items-center">
+      <div className="flex gap-6 items-center">
         <div className="flex items-center w-[55px] rounded-full h-[55px] bg-[#65D36E] cursor-pointerr justify-center" onClick={() => setPlayer(!player)}>
           {player ? <PauseIcon sx={{ width: "35px", height: '35px' }} /> : <PlayArrowIcon sx={{ width: "35px", height: '35px' }} />}
 

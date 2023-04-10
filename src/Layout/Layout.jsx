@@ -11,11 +11,13 @@ import { musicInfoCTX } from "../contexts/musicInfoCTX";
 import { openBigImgCTX } from "../contexts/openBigImgCTX";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
+import { bgColorCTX } from '../contexts/bgColorCTX'
 
 const Layout = () => {
   const [token, setToken] = useState("");
   const [search, setSearch] = useState("");
   const [play, setPlay] = useState(false);
+  const [bg, setBg] = useState('')
   const [id, setId] = useState("");
   const [src, setSrc] = useState("");
   const [open, setOpen] = useState(false);
@@ -120,6 +122,7 @@ const Layout = () => {
                 <reloadPlaylistsCTX.Provider
                   value={{ Setreload , reloadPlaylists}}
                 >
+					<bgColorCTX.Provider value={{setBg, bg}}>
                   <div className="flex relative">
                     <Aside />
                     <div className="w-[77.2%] relative ml-[20.2%] ">
@@ -130,6 +133,7 @@ const Layout = () => {
                       <Footer />
                     </div>
                   </div>
+					</bgColorCTX.Provider>
                 </reloadPlaylistsCTX.Provider>
               </myPlaylistCTX.Provider>
             </openBigImgCTX.Provider>
