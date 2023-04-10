@@ -7,15 +7,11 @@ import { getAverageRGB } from "../hook/getImageColor";
 
 
 const Playlist = ({ img, item, like, name }) => {
-
-
-
     const [user, setUser] = useState("");
     const { loading, error, request } = useHttp()
     const [MyPlaylists, setMyPlaylists] = useState([]);
     const imgEl = useRef(null);
     const {setBg} = useContext(bgColorCTX)
-
 
     //GetUser
     useEffect(() => {
