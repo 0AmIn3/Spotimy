@@ -12,11 +12,9 @@ const LikedSongs = lazy(() => import("./pages/LikedSongs"))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
 
 
-
 function App() {
 
 	let location = useLocation()
-
 
 	useEffect(() => {
 		let body = document.body
