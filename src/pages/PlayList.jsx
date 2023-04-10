@@ -35,18 +35,7 @@ const PlayList = () => {
 
     // temporary //
     let body = document.body;
-    // let img = document.querySelector('img')
     body.style.background = `linear-gradient(180deg, ${bg} 5.09%, #121212 43.28%)`
-    // console.log(bg);    
-    // let bg = getAverageRGB(img)
-    // console.log(bg);
-    // body.style.background = `linear-gradient(180deg, ${bg} 5.09%, #121212 43.28%)`
-    // body.style.backgroundImage =
-    //   "linear-gradient(180deg, #A34284 5.09%, #121212 43.28%)";
-    // body.style.backgroundRepeat = "no-repeat";
-
-    
-    
     // temporary //
   }, [reloadPlaylistsy]);
   return (
