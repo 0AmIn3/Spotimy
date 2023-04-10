@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import PlayList from "./pages/PlayList"
 import Library from "./pages/Library"
 import CreatePlaylist from "./pages/CreatePlaylist";
+import LikedSongs from "./pages/LikedSongs";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/create" element={<CreatePlaylist/>}/>
                 <Route path="/library" element={<Library/>}/>
+                <Route path="/liked" element={<LikedSongs/>}/>
             </Route>
 		</Routes>
 	)

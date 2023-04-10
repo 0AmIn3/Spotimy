@@ -1,10 +1,10 @@
 .head-row{
 
     th, td{
-        
+        padding: 0 0 5px 10px !important;
         border-bottom: 1px solid #666666;
         color: #B3B3B3;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 450;
     }
 }
@@ -13,10 +13,9 @@
 .body-row{
 
     th, td{
+        padding: 15px 0 0 10px !important;
         border-bottom: none !important;
-        
         color: #B3B3B3;
-        font-size: 18px;
     }
     th{
         text-align: left;
@@ -25,7 +24,20 @@
     
 }
 
+.albumImg{
+    filter: drop-shadow(0px 0px 24px rgba(0, 0, 0, 0.25));
+}
+
 .table-bg{
     background-color: transparent !important;
     box-shadow: none !important;
+}
+
+.likeImg {
+    width: 230px;
+    height: 230px;
+    background-image: url(../public/images/likePic.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

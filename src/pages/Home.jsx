@@ -5,20 +5,18 @@ import Items from "../components/Items";
 import Musicblock from "../components/Musicblock";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
+import { useHttp } from "../hook/http.hook";
 
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
-	const { setPlaylist } = useContext(myPlaylistCTX)
+	const [myAlbom, setMyAlbom] = useState([])
+	const { loading, error, request } = useHttp()
 
 	useEffect(() => {
-		axios
-			.get(`https://api.spotify.com/v1/me/playlists`, {
-				headers: { Authorization: `Bearer ${token}` },
-			})
+		request('https://api.spotify.com/v1/me/playlists')
 			.then((res) => {
-				setMyPlaylists(res.data.items)
-				setPlaylist(res.data.items)
+				setMyPlaylists(res.items)
 			});
 	}, []);
 
@@ -29,6 +27,12 @@ const Home = () => {
 		body.style.backgroundRepeat = "no-repeat";
 	}, []);
 
+	useEffect(() => {
+		request("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5")
+			.then((res) => {
+				setMyAlbom(res.playlists.items)
+			})
+	}, [])
 
 	return (
 		<>
@@ -49,21 +53,19 @@ const Home = () => {
 				Your top mixes
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
+				{
+					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
+				}
+
+
 			</div>
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Made for you
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
-				<GoToPlayList />
+				{
+					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
+				}
 			</div>
 		</>
 	);

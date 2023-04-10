@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { useEffect, useState } from "react";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
@@ -6,15 +6,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { musicCTX } from '../contexts/musicCTX';
+
 
 const PlayListOptions = () => {
-
+  let { play, changePlay, src } = useContext(musicCTX)
+	const [isTurn, setIsTurn] = useState(play);
   const [age, setAge] = useState('');
-  const [play, setPlay] = useState(false)
+  const [player, setPlayer] = useState(false)
 
-  useEffect(() => {
-    let audio = document.querySelector('audio')
-    play ? audio.play() : audio.pause()
+  // useEffect(() => {
+  //   let audio = document.querySelector('audio')
+  //   player ? audio.player() : audio.pause()
+  // }, [player])
+
+  useEffect(()=> {
+    setIsTurn(play)
   }, [play])
 
   const handleChange = (event) => {
@@ -24,20 +31,20 @@ const PlayListOptions = () => {
 
 
   return (
-    <div className="flex justify-between px-2 select-none">
-      <div className=" flex gap-10 items-center">
-        <div className="flex items-center w-[70px] rounded-full h-[70px] bg-[#65D36E] cursor-pointerr justify-center" onClick={() => setPlay(!play)}>
-          {play ? <PauseIcon sx={{ width: "40px", height: '40px' }} /> : <PlayArrowIcon sx={{ width: "40px", height: '40px' }} />}
+    <div className="flex justify-between px-1 select-none">
+      <div className="flex gap-6 items-center">
+        <div className="flex items-center w-[55px] rounded-full h-[55px] bg-[#65D36E] cursor-pointerr justify-center" onClick={() => setPlayer(!player)}>
+          {player ? <PauseIcon sx={{ width: "35px", height: '35px' }} /> : <PlayArrowIcon sx={{ width: "35px", height: '35px' }} />}
 
         </div>
-        <div className="flex items-center gap-9">
-          <img src="/img/LikePlaylist.png" className="w-[52px]" alt="" />
-          <img src="/img/DownloadPlaylist.png" className="w-[52px]" alt="" />
-          <img src="/img/OptionsPlaylist.png" className="w-[44px]" alt="" />
+        <div className="flex items-center gap-4">
+          <img src="/img/LikePlaylist.png" className="w-[36px]" alt="" />
+          <img src="/img/DownloadPlaylist.png" className="w-[36px]" alt="" />
+          <img src="/img/OptionsPlaylist.png" className="w-[40px]" alt="" />
         </div>
       </div>
       <div className="flex items-center">
-        <img src="/img/SearchPlaylist.png" className="w-[25px] mr-[50px]" alt="" />
+        <img src="/img/SearchPlaylist.png" className="w-[19px] mr-[20px]" alt="" />
         {/* <FormControl variant="filled" sx={{ m: 1, minWidth: 150, background: 'transparent', border: 'none' }}>
           <InputLabel sx={{ color: '#fff' }} id="demo-simple-select-filled-label">Custom order</InputLabel>
           <Select
@@ -55,7 +62,7 @@ const PlayListOptions = () => {
           </Select>
         </FormControl> */}
 
-        <p className='text-[#fff] text-[18px] font-medium'>Custom order</p>
+        <p className='text-[#fff] text-[14px] font-medium'>Custom order</p>
       </div>
     </div>
   );

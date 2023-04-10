@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // import { useState } from 'react';
 import TableCell from "@mui/material/TableCell";
@@ -10,73 +11,107 @@ import { musicInfoCTX } from "../contexts/musicInfoCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
 
-const Songs = ({ item, idx }) => {
-	const [isTurn, setIsTurn] = useState(false);
-	const { changeSrc, changeId, changePlayTrue } = useContext(musicCTX);
-	const { changeInfo } = useContext(musicInfoCTX)
+const Songs = ({ item, idx, ChangeAdd }) => {
+  const { changeSrc, changeId, changePlayTrue, id } = useContext(musicCTX);
+  const { changeInfo } = useContext(musicInfoCTX);
+  const [isLike, setIsLike] = useState(false);
+  const [Likesongs, setLikesongs] = useState([]);
+  const paramsID = useParams();
+  const token = useContext(tokenCTX);
+  const {Setreload}  = useContext(reloadPlaylistsCTX)
 
-	const { id } = useParams();
-	const token = useContext(tokenCTX);
-	function AddTrank (trackuri){
-		axios
-		.post(
-		  `https://api.spotify.com/v1/playlists/${id}/tracks`,
-		  {
-			uris: [trackuri],
-		  },
-		  
-		  {
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			},
-		  }
-		)
-		.then((res) => console.log(res));
-	}
-	function DelTrank (trackuri){
-		axios
-		.delete(`https://api.spotify.com/v1/playlists/${id}/tracks`,
-		  { "tracks": [{"uri": "spotify:track:6zDs6zI94L761vd0cVScTT"}]},
-		  {
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			},
-		  }
-		)
-		.then((res) => console.log(res));
-	}
-	return (
-		<TableRow style={{width: '100%'}}
-			onClick={() => {
-				changeSrc(item.preview_url), changeId(item.id);
-				changePlayTrue();
-				changeInfo(item?.album?.images[2].url, item?.album?.images[1].url,item?.name,item?.album?.artists[0].name)
+  let locData = JSON.parse(localStorage.getItem("likesongs"));
 
-			}}
-			className="body-row"
-		>
-			<TableCell component="th" scope="row">
-				<p className="count">{idx + 1}</p>
-			</TableCell>
-			<TableCell align="left">
-				<div className="flex">
-					<img
-						className="pr-4"
-						src={item?.album?.images[2]?.url}
-						alt=""
-					/>
-					<div>
-						<h6>{item.name}</h6>
-						<p>{item?.artists[0]?.name}</p>
-					</div>
-				</div>
-			</TableCell>
-			<TableCell align="left">{item.name}</TableCell>
-			<TableCell align="left"></TableCell>
-			<TableCell align="left">2 : 12</TableCell>
-		</TableRow>
-	);
+  function AddTrank(trackuri) {
+    axios
+      .post(
+        `https://api.spotify.com/v1/playlists/${paramsID.id}/tracks`,
+        {
+          uris: [trackuri],
+        },
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => console.log(res));
+  }
+  function DelTrank(trackuri) {
+    axios
+      .delete(
+        `https://api.spotify.com/v1/playlists/${id}/tracks`,
+        { tracks: [{ uri: "spotify:track:6zDs6zI94L761vd0cVScTT" }] },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => console.log(res));
+  }
+
+  if (isLike) {
+    localStorage.setItem("likesongs", JSON.stringify(item));
+  }
+
+  return (
+    <TableRow
+      style={{ width: "100%", userSelect: "none" }}
+      className="body-row"
+    >
+      <TableCell component="th" scope="row">
+        <p className="count">
+          {item.id === id ? <Audio height="28" width="28" /> : idx + 1}
+        </p>
+      </TableCell>
+      <TableCell
+        align="left"
+        onClick={() => {
+          changeSrc(item.preview_url), changeId(item.id);
+          changePlayTrue();
+          changeInfo(
+            item?.album?.images[2].url,
+            item?.album?.images[1].url,
+            item?.name,
+            item?.album?.artists[0].name
+          );
+        }}
+      >
+        <div className="flex">
+          <img
+            className="pr-4 h-[40px]"
+            src={item?.album?.images[2]?.url}
+            alt=""
+          />
+          <div>
+            <h6 className="text-[14px] text-[#ffffff]">{item.name}</h6>
+            <p className="text-[13px]">{item?.artists[0]?.name}</p>
+          </div>
+        </div>
+      </TableCell>
+      <TableCell className="text-[14px]" align="left">
+        {item.name}
+      </TableCell>
+      <TableCell onClick={() => setIsLike(!isLike)} align="left">
+        {isLike ? <AiFillHeart color="#63CF6C" /> : <AiOutlineHeart />}
+      </TableCell>
+      <TableCell align="left">2 : 12</TableCell>
+      {ChangeAdd ? <TableCell
+        align="left"
+        onClick={() => {
+			  AddTrank(item.uri)
+			  Setreload()
+        }}
+      >
+        ADD
+      </TableCell> : console.log()}
+	  
+    </TableRow>
+  );
 };
 
 export default Songs;

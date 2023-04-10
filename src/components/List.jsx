@@ -12,15 +12,15 @@ import "./../style.scss";
 
 export default function List({arr}) {
 	return (
-		<div className="mt-[30px]">
-			<TableContainer className="table-bg px-8 " component={Paper}>
+		<div className="mt-[20px]">
+			<TableContainer className="table-bg px-1" component={Paper}>
 				<Table className="">
 					<TableHead className="px-2 ">
 						<TableRow className="head-row">
-							<TableCell className="text-[22px]">#</TableCell>
-							<TableCell align="left">TITLE</TableCell>
-							<TableCell align="left">ALBUM</TableCell>
-							<TableCell align="left">DATE ADDED</TableCell>
+							<TableCell align="center" className="text-[22px]">#</TableCell>
+							<TableCell align="left">Title</TableCell>
+							<TableCell align="left">Album</TableCell>
+							<TableCell align="left">Date added</TableCell>
 							<TableCell align="right">
 								<img
 									className=""
@@ -32,7 +32,7 @@ export default function List({arr}) {
 					</TableHead>
 					<TableBody className="px-2">
 						{arr.map((item, idx) => (
-							<Songs item={item.track} key={item.id} idx={idx} />
+							<Songs item={item.track} key={idx} idx={idx}  />
 						))}
 					</TableBody>
 				</Table>
