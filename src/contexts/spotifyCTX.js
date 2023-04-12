@@ -2,9 +2,9 @@ import {
     createContext
 } from "react";
 
-const actualURL = import.meta.url.split('/src')[0]
+let actualURL = import.meta.url.split('/src')[0].split(':')
+actualURL = actualURL[0] + "://localhost:" + actualURL.at(-1)
 
-console.log(actualURL);
 
 export const spotify = createContext({
     client_id: import.meta.env.VITE_API_KEY,
