@@ -3,9 +3,12 @@ import PauseIcon from "@mui/icons-material/Pause";
 import { useContext, useEffect, useState } from "react";
 import { musicCTX } from "../contexts/musicCTX";
 import Slider from "@mui/material/Slider";
-import { musicTimeCTX } from "../contexts/musicTimeCTX";
+import { nextMusicCTX } from "../contexts/nextMusicCTX";
+import { prevMusicCTX } from "../contexts/prevMusicCTX";
 
 const FooterCenter = () => {
+   const {changeNextMusic, nextMusic} = useContext(nextMusicCTX)
+   const {changePrevMusic, prevMusic} = useContext(prevMusicCTX)
 	let { play, changePlay, src } = useContext(musicCTX);
 	const {setTime , time} = useContext(musicTimeCTX);
 	
@@ -48,7 +51,7 @@ const FooterCenter = () => {
 						backgroundImage: "url('../../public/random.png')",
 					}}
 				></div>
-				<div
+				<div onClick={changePrevMusic}
 					className="w-[14px] h-[14px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]"
 					style={{ backgroundImage: "url('../../public/prev.png')" }}
 				></div>
@@ -58,7 +61,7 @@ const FooterCenter = () => {
 				>
 					{play ? <PauseIcon /> : <PlayArrowIcon />}
 				</div>
-				<div
+				<div onClick={changeNextMusic}
 					className="w-[14px] h-[14px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]"
 					style={{
 						backgroundImage: "url('../../public/nextsong.png')",
@@ -80,8 +83,7 @@ const FooterCenter = () => {
 				sx={{ width: "550px", height: "5px", color: "#fff" }}
 			/>
 			<audio
-		
-		className="audoiduration"
+        onEnded={changeNextMusic}
 				src={src}
 				onTimeUpdate={(e) => uptadeProgress(e.target)}
 			></audio>

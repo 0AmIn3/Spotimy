@@ -13,50 +13,60 @@ import { openBigImgCTX } from "../contexts/openBigImgCTX";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
 import { bgColorCTX } from "../contexts/bgColorCTX";
+import {nextMusicCTX} from '../contexts/nextMusicCTX'
+import {prevMusicCTX} from '../contexts/prevMusicCTX'
+import {musicIndexCTX} from '../contexts/musicIndexCTX'
 
 const Layout = () => {
-  const [token, setToken] = useState("");
-  const [search, setSearch] = useState("");
-  const [play, setPlay] = useState(false);
-  const [bg, setBg] = useState("");
-  const [id, setId] = useState("");
-  const [src, setSrc] = useState("");
-  const [time, setTime] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [reloadPlaylists, setReloadPlaylists] = useState(true);
-  const [info, setInfo] = useState({
-    img: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
-    imgbig: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
-    title: "Play It Safe",
-    artist: "Julia Wolf",
-  });
+	const [token, setToken] = useState("");
+	const [search, setSearch] = useState("");
+	const [play, setPlay] = useState(false);
+	const [nextMusic, setNextMusic] = useState(false)
+	const [prevMusic, setPrevMusic] = useState(false)
+	const [bg, setBg] = useState("");
+	const [id, setId] = useState("");
+	const [src, setSrc] = useState("");
+	const [open, setOpen] = useState(false);
+	const [index, setIndex] = useState(0)
+	const [reloadPlaylists, setReloadPlaylists] = useState(true);
+	const [info, setInfo] = useState({
+		img: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
+		imgbig: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
+		title: "Play It Safe",
+		artist: "Julia Wolf",
+	});
 
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate(-1);
-  };
-  const next = () => {
-    navigate(1);
-  };
-  const Setreload = () => {
-    setReloadPlaylists(!reloadPlaylists);
-  };
-  const changeOpen = () => {
-    setOpen(!open);
-  };
-  const changePlay = () => {
-    setPlay(!play);
-  };
-  const changePlayTrue = () => {
-    setPlay(true);
-  };
-  const changeId = (id) => {
-    setId(id);
-  };
-  const changeSrc = (src) => {
-    setSrc(src);
-  };
+	const navigate = useNavigate();
+	const changePrevMusic = () => {
+		setPrevMusic(!prevMusic)
+	};
+	const changeNextMusic = () => {
+		setNextMusic(!nextMusic)
+	};
+	const goBack = () => {
+		navigate(-1);
+	};
+	const next = () => {
+		navigate(1);
+	};
+	const Setreload = () => {
+    setReloadPlaylists(!reloadPlaylists)
+	};
+	const changeOpen = () => {
+		setOpen(!open);
+	};
+	const changePlay = () => {
+		setPlay(!play);
+	};
+	const changePlayTrue = () => {
+		setPlay(true);
+	};
+	const changeId = (id) => {
+		setId(id);
+	};
+	const changeSrc = (src) => {
+		setSrc(src);
+	};
 
   const changeInfo = (songimg, songimgbig, songtitle, songartist) => {
     setInfo({
@@ -103,48 +113,57 @@ const Layout = () => {
     );
   }
 
-  return (
-    <tokenCTX.Provider value={token}>
-      <searchCTX.Provider value={{ setSearchResults, search }}>
-        <musicCTX.Provider
-          value={{
-            changePlay,
-            changeId,
-            changeSrc,
-            changePlayTrue,
-            play,
-            id,
-            src,
-          }}
-        >
-          <musicTimeCTX.Provider value={{ setTime, time }}>
-            <musicInfoCTX.Provider value={{ changeInfo, info }}>
-              <openBigImgCTX.Provider value={{ changeOpen, open }}>
-                <myPlaylistCTX.Provider value={{ setPlaylist, playlist }}>
-                  <reloadPlaylistsCTX.Provider
-                    value={{ Setreload, reloadPlaylists }}
-                  >
-                    <bgColorCTX.Provider value={{ setBg, bg }}>
-                      <div className="flex relative">
-                        <Aside />
-                        <div className="w-[77.2%] relative ml-[20.2%] ">
-                          <Header goBack={goBack} next={next} />
-                          <main className="mt-[110px] mb-[150px] min-h-[100vh]">
-                            <Outlet />
-                          </main>
-                          <Footer />
-                        </div>
-                      </div>
-                    </bgColorCTX.Provider>
-                  </reloadPlaylistsCTX.Provider>
-                </myPlaylistCTX.Provider>
-              </openBigImgCTX.Provider>
-            </musicInfoCTX.Provider>
-          </musicTimeCTX.Provider>
-        </musicCTX.Provider>
-      </searchCTX.Provider>
-    </tokenCTX.Provider>
-  );
+	return (
+		<tokenCTX.Provider value={token}>
+			<searchCTX.Provider value={{ setSearchResults, search }}>
+				<musicCTX.Provider
+					value={{
+						changePlay,
+						changeId,
+						changeSrc,
+						changePlayTrue,
+						play,
+						id,
+						src,
+					}}
+				>
+					<musicInfoCTX.Provider value={{ changeInfo, info }}>
+						<openBigImgCTX.Provider value={{ changeOpen, open }}>
+							<myPlaylistCTX.Provider
+								value={{ setPlaylist, playlist }}
+							>
+								<reloadPlaylistsCTX.Provider
+									value={{ Setreload, reloadPlaylists }}
+								>
+									<bgColorCTX.Provider value={{ setBg, bg }}>
+										<nextMusicCTX.Provider value={{changeNextMusic, nextMusic}}>
+										<prevMusicCTX.Provider value={{changePrevMusic, prevMusic}}>
+											<musicIndexCTX.Provider value={{setIndex, index}} >
+											<div className="flex relative">
+											<Aside />
+											<div className="w-[77.2%] relative ml-[20.2%] ">
+												<Header
+													goBack={goBack}
+													next={next}
+												/>
+												<main className="mt-[110px] mb-[150px] min-h-[100vh]">
+													<Outlet />
+												</main>
+												<Footer />
+											</div>
+										</div>
+											</musicIndexCTX.Provider>
+										</prevMusicCTX.Provider>
+										</nextMusicCTX.Provider>
+									</bgColorCTX.Provider>
+								</reloadPlaylistsCTX.Provider>
+							</myPlaylistCTX.Provider>
+						</openBigImgCTX.Provider>
+					</musicInfoCTX.Provider>
+				</musicCTX.Provider>
+			</searchCTX.Provider>
+		</tokenCTX.Provider>
+	);
 };
 
 export default Layout;

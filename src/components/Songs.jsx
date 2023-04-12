@@ -13,11 +13,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
 import { useHttp } from "../hook/http.hook";
-import { musicTimeCTX } from "../contexts/musicTimeCTX";
+
+import { musicIndexCTX } from "../contexts/musicIndexCTX";
 
 const Songs = ({ item, idx, ChangeAdd }) => {
 	const { changeSrc, changeId, changePlayTrue, id } = useContext(musicCTX);
 	const { changeInfo } = useContext(musicInfoCTX);
+	const {setIndex} = useContext(musicIndexCTX)
 	const [isLike, setIsLike] = useState(false);
 	const [Likesongs, setLikesongs] = useState([]);
 	const paramsID = useParams();
@@ -68,6 +70,7 @@ const Songs = ({ item, idx, ChangeAdd }) => {
 			<TableCell
 				align="left"
 				onClick={() => {
+					setIndex(idx)
 					changeSrc(item.preview_url), changeId(item.id);
 					changePlayTrue();
 					changeInfo(

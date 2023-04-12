@@ -20,6 +20,7 @@ const PlayList = () => {
 	const { loading, error, request } = useHttp();
 	const { reloadPlaylists } = useContext(reloadPlaylistsCTX);
 	const { bg } = useContext(bgColorCTX);
+    const [playlistId, setPlaylistId] = useState('')
 
 	useEffect(() => {
 		request(`https://api.spotify.com/v1/playlists/${id}/tracks`).then(
@@ -31,13 +32,14 @@ const PlayList = () => {
 			setName(res.name);
 			setImg(res?.images[0]?.url);
 		});
+        setPlaylistId(id)
 		let body = document.body;
-		body.style.background = `linear-gradient(180deg, ${bg} 5.09%, #121212 43.28%)`;
+		body.style.background = '#121212'
 	}, [reloadPlaylists]);
 	return (
 		<>
 			<Playlist img={state?.img || img} item={tracks} name={name} />
-			<PlayListOptions />
+			<PlayListOptions id={id}/>
 			<List arr={tracks} />
 			<SearchTracks />
 		</>
