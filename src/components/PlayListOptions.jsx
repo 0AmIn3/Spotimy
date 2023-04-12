@@ -84,6 +84,8 @@ useEffect(() => {
   }
 }, [prevMusic])
 
+console.log(audio);
+
 
   return (
     <div className="flex justify-between px-1 select-none">

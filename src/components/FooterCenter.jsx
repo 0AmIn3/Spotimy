@@ -74,6 +74,7 @@ const FooterCenter = () => {
 				sx={{ width: "550px", height: "5px", color: "#fff" }}
 			/>
 			<audio
+            onEnded={changeNextMusic}
 				src={src}
 				onTimeUpdate={(e) => uptadeProgress(e.target)}
 			></audio>
