@@ -84,7 +84,6 @@ useEffect(() => {
   }
 }, [prevMusic])
 
-console.log(audio);
 
 
   return (
