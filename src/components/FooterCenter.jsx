@@ -7,8 +7,8 @@ import { nextMusicCTX } from "../contexts/nextMusicCTX";
 import { prevMusicCTX } from "../contexts/prevMusicCTX";
 
 const FooterCenter = () => {
-   const {setNextMusic, nextMusic} = useContext(nextMusicCTX)
-   const {setPrevMusic, prevMusic} = useContext(prevMusicCTX)
+   const {changeNextMusic, nextMusic} = useContext(nextMusicCTX)
+   const {changePrevMusic, prevMusic} = useContext(prevMusicCTX)
 	let { play, changePlay, src } = useContext(musicCTX);
 
 	useEffect(() => {
@@ -42,7 +42,7 @@ const FooterCenter = () => {
 						backgroundImage: "url('../../public/random.png')",
 					}}
 				></div>
-				<div onClick={() => setPrevMusic(!prevMusic)}
+				<div onClick={changePrevMusic}
 					className="w-[14px] h-[14px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]"
 					style={{ backgroundImage: "url('../../public/prev.png')" }}
 				></div>
@@ -52,7 +52,7 @@ const FooterCenter = () => {
 				>
 					{play ? <PauseIcon /> : <PlayArrowIcon />}
 				</div>
-				<div onClick={() => setNextMusic(!nextMusic)}
+				<div onClick={changeNextMusic}
 					className="w-[14px] h-[14px] bg-no-repeat cursor-pointer bg-contain duration-[500ms] hover:invert-[30%]"
 					style={{
 						backgroundImage: "url('../../public/nextsong.png')",

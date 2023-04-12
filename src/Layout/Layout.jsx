@@ -26,7 +26,7 @@ const Layout = () => {
 	const [id, setId] = useState("");
 	const [src, setSrc] = useState("");
 	const [open, setOpen] = useState(false);
-	const [index, setIndex] = useState()
+	const [index, setIndex] = useState(0)
 	const [reloadPlaylists, setReloadPlaylists] = useState(true);
 	const [info, setInfo] = useState({
 		img: "https://i.scdn.co/image/ab67616d000048512a3e79f1348f62bfe6063314",
@@ -36,7 +36,12 @@ const Layout = () => {
 	});
 
 	const navigate = useNavigate();
-
+	const changePrevMusic = () => {
+		setPrevMusic(!prevMusic)
+	};
+	const changeNextMusic = () => {
+		setNextMusic(!nextMusic)
+	};
 	const goBack = () => {
 		navigate(-1);
 	};
@@ -130,8 +135,8 @@ const Layout = () => {
 									value={{ Setreload, reloadPlaylists }}
 								>
 									<bgColorCTX.Provider value={{ setBg, bg }}>
-										<nextMusicCTX.Provider value={{setNextMusic, nextMusic}}>
-										<prevMusicCTX.Provider value={{setPrevMusic, prevMusic}}>
+										<nextMusicCTX.Provider value={{changeNextMusic, nextMusic}}>
+										<prevMusicCTX.Provider value={{changePrevMusic, prevMusic}}>
 											<musicIndexCTX.Provider value={{setIndex, index}} >
 											<div className="flex relative">
 											<Aside />

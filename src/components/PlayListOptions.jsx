@@ -18,13 +18,13 @@ const PlayListOptions = ({id}) => {
   let { play, changePlay, changeSrc, changePlayTrue,changeId, src } = useContext(musicCTX)
   const {setNextMusic, nextMusic} = useContext(nextMusicCTX)
   const {setPrevMusic, prevMusic} = useContext(prevMusicCTX)
-	const {index} = useContext(musicIndexCTX)
+const {index} = useContext(musicIndexCTX)
   const { changeInfo } = useContext(musicInfoCTX);
-	// const [isTurn, setIsTurn] = useState(play);
   const [age, setAge] = useState('');
   const [player, setPlayer] = useState(false)
   const { loading, error, request } = useHttp();
-  const [count, setCount] = useState(-1)
+  const [count, setCount] = useState(1)
+  const [length, setLenght] = useState(0)
 
   // useEffect(() => {
   //   let audio = document.querySelector('audio')
@@ -32,29 +32,13 @@ const PlayListOptions = ({id}) => {
   // }, [player])
 
 
-useEffect(() => {
-  setCount(index)
-  if(!play) {
-    changePlayTrue()
-  }
-}, [index])
-useEffect(() => {
-  setCount(count + 1)
-  if(!play) {
-    changePlayTrue()
-  }
-}, [nextMusic])
-useEffect(() => {
-  setCount(count - 1)
-  if(!play) {
-    changePlayTrue()
-  }
-}, [prevMusic])
 
-  useEffect(()=> {
+  useEffect(() => {
     if(player) {
+	console.log(count);
 	 request(`https://api.spotify.com/v1/playlists/${id}/tracks`).then(
 			(res) => {
+				
 	   changeSrc(res.items[count]?.track?.preview_url)
 	   changeId(res.items[count]?.track?.id)
 	   changeInfo(
@@ -63,7 +47,8 @@ useEffect(() => {
 		res.items[count]?.track?.name,
 		res.items[count]?.track?.artists[0].name
 	   );
-			}
+	   setLenght(res.items.length - 1)
+		}
 	 );
     } 
   }, [player, count])
@@ -84,7 +69,20 @@ useEffect(() => {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
+  useEffect(() => {
+  setCount(index)
+}, [index])
+useEffect(() => {
+	if(count < length) {
+		setCount(count + 1)
+	}
+	
+}, [nextMusic])
+useEffect(() => {
+  if(count !== 0) {
+	setCount(count - 1)
+  }
+}, [prevMusic])
 
 
   return (
