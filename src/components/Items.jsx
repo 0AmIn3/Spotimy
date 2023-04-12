@@ -7,7 +7,7 @@ const Items = ({name, img, id}) => {
     return ( 
         <Link to={`/playlist/${id}`} state={{img}} >
             <div className="grid-block overflow-hidden">
-                <div className="grid-img"style={{backgroundImage: `url(${img})`}} ></div>
+                <div className="grid-img shadowbox"style={{backgroundImage: `url(${img})`}} ></div>
                 <p className="grid-text">{name}</p>
             </div>
         </Link>

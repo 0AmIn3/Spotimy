@@ -8,22 +8,26 @@ import { useHttp } from "../hook/http.hook";
 const Header = ({goBack, next}) => {
 	const [user, setUser] = useState('')
 	const {loading, error, request} = useHttp()
+	const {setSearchResults} = useContext(searchCTX)
+	const {pathname} = useLocation();
 
 	window.onscroll = () => {
 		let header = document.querySelector('header')
 		let val = window.scrollY
-		if(val === 0) {
-		header.style.background = `transparent`
-		} else {
-		header.style.background = `#000000${val * .3}`
+		if(header) {
+			if(val === 0) {
+				header.style.background = `transparent`
+			} else {
+				header.style.background = `#000000${val * .3}`
+			}
 		}
 	}
-	const {search, setSearchResults} = useContext(searchCTX)
+	
 	useEffect(() => {
 		request(`https://api.spotify.com/v1/me`)
 			.then(res => setUser(res))
 	}, [])
-	const {pathname} = useLocation();
+	
 	const localClear = () => {
 		localStorage.clear()
 	}

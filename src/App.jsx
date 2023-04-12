@@ -1,20 +1,20 @@
-
-import { useContext, useEffect, useState } from "react";
+import { Suspense, useEffect, lazy} from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout/Layout";
-import Doc from "./pages/doc";
-import SearchPage from "./pages/SearchPage";
-import Home from "./pages/Home";
-import Settings from "./pages/Settings";
-import PlayList from "./pages/PlayList"
-import Library from "./pages/Library"
-import CreatePlaylist from "./pages/CreatePlaylist";
-import LikedSongs from "./pages/LikedSongs";
+import { Audio } from "react-loader-spinner";
+
+const Home = lazy(() => import("./pages/Home")) 
+const Settings = lazy(() => import("./pages/Settings")) 
+const PlayList = lazy(() => import("./pages/PlayList")) 
+const Library = lazy(() => import("./pages/Library")) 
+const CreatePlaylist = lazy(() => import("./pages/CreatePlaylist")) 
+const LikedSongs = lazy(() => import("./pages/LikedSongs")) 
+const SearchPage = lazy(() => import('./pages/SearchPage'))
+
 
 function App() {
 
 	let location = useLocation()
-
 
 	useEffect(() => {
 		let body = document.body
@@ -26,17 +26,19 @@ function App() {
 	
 
 	return (
-		<Routes>
-			<Route path="/" element={<Layout/>} >
-                <Route index path="/" element={<Home/>}/>
-                <Route path="/playlist/:id" element={<PlayList/>}/>
-                <Route path="/search" element={<SearchPage/>}/>
-                <Route path="/settings" element={<Settings/>}/>
-                <Route path="/create" element={<CreatePlaylist/>}/>
-                <Route path="/library" element={<Library/>}/>
-                <Route path="/liked" element={<LikedSongs/>}/>
-            </Route>
-		</Routes>
+		<Suspense fallback={<Audio width="100" height="100" />} >
+			<Routes>
+				<Route path="/" element={<Layout/>} >
+					<Route index path="/" element={<Home/>}/>
+					<Route path="/playlist/:id" element={<PlayList/>}/>
+					<Route path="/search" element={<SearchPage/>}/>
+					<Route path="/settings" element={<Settings/>}/>
+					<Route path="/create" element={<CreatePlaylist/>}/>
+					<Route path="/library" element={<Library/>}/>
+					<Route path="/liked" element={<LikedSongs/>}/>
+				</Route>
+			</Routes>
+		</Suspense>
 	)
   }
 

@@ -11,41 +11,39 @@ import { getAverageRGB } from "../hook/getImageColor";
 import { bgColorCTX } from "../contexts/bgColorCTX";
 
 const PlayList = () => {
-  const [tracks, setTracks] = useState([]);
-  const [name, setName] = useState([]);
-  const [img, setImg] = useState([]);
-  // const [reload, setReload] = useState(0);
-  const { id } = useParams();
-  const { state } = useLocation();
-  const { loading, error, request } = useHttp()
-  const reloadPlaylistsy  = useContext(reloadPlaylistsCTX)
-  const {bg} = useContext(bgColorCTX)
-  // const aa = useContext(reloadPlaylistsCTX)
+	const [tracks, setTracks] = useState([]);
+	const [name, setName] = useState([]);
+	const [img, setImg] = useState([]);
+	// const [reload, setReload] = useState(0);
+	const { id } = useParams();
+	const { state } = useLocation();
+	const { loading, error, request } = useHttp();
+	const { reloadPlaylists } = useContext(reloadPlaylistsCTX);
+	const { bg } = useContext(bgColorCTX);
+    const [playlistId, setPlaylistId] = useState('')
 
-  useEffect(() => {
-    request(`https://api.spotify.com/v1/playlists/${id}/tracks`)
-    .then((res) => {
-      setTracks(res?.items);  
-    });
-    request(`https://api.spotify.com/v1/playlists/${id}`)
-    .then((res) => {
-      setName(res.name) 
-      setImg(res?.images[0]?.url);
-    });
-
-    // temporary //
-    let body = document.body;
-    body.style.background = `linear-gradient(180deg, ${bg} 5.09%, #121212 43.28%)`
-    // temporary //
-  }, [reloadPlaylistsy]);
-  return (
-    <>
-      <Playlist img={state?.img || img} item={tracks} name={name}  />
-      <PlayListOptions />
-      <List arr={tracks} />
-      <SearchTracks />
-    </>
-  );
+	useEffect(() => {
+		request(`https://api.spotify.com/v1/playlists/${id}/tracks`).then(
+			(res) => {
+				setTracks(res?.items);
+			}
+		);
+		request(`https://api.spotify.com/v1/playlists/${id}`).then((res) => {
+			setName(res.name);
+			setImg(res?.images[0]?.url);
+		});
+        setPlaylistId(id)
+		let body = document.body;
+		body.style.background = '#121212'
+	}, [reloadPlaylists]);
+	return (
+		<>
+			<Playlist img={state?.img || img} item={tracks} name={name} />
+			<PlayListOptions id={id}/>
+			<List arr={tracks} />
+			<SearchTracks />
+		</>
+	);
 };
 
 export default PlayList;

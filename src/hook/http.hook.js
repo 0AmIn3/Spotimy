@@ -7,11 +7,13 @@ export const useHttp = () => {
     const [error, setError] = useState(false)
     const token = useContext(tokenCTX)
 
-    const request = useCallback(async (url, method = "GET", body = null,headers = {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}) => {
+    const request = useCallback(async (url, method = "GET", body = null, headers = {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}) => {
         setLoading(true)
 
         try {
-
+            if(body) {
+                body = JSON.stringify(body)
+            }
             const res = await fetch(url, {method, body, headers})
 
             if(!res.ok) {

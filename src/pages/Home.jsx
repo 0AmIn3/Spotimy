@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { Audio } from "react-loader-spinner";
 import GoToPlayList from "../components/GoToPlayList";
 import Items from "../components/Items";
 import Musicblock from "../components/Musicblock";
@@ -10,14 +11,13 @@ import { useHttp } from "../hook/http.hook";
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
-	const [myAlbom, setMyAlbom] = useState([])
-	const { loading, error, request } = useHttp()
+	const [myAlbom, setMyAlbom] = useState([]);
+	const { loading, error, request } = useHttp();
 
 	useEffect(() => {
-		request('https://api.spotify.com/v1/me/playlists')
-			.then((res) => {
-				setMyPlaylists(res.items)
-			});
+		request("https://api.spotify.com/v1/me/playlists").then((res) => {
+			setMyPlaylists(res.items);
+		});
 	}, []);
 
 	useEffect(() => {
@@ -28,11 +28,16 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
-		request("https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5")
-			.then((res) => {
-				setMyAlbom(res.playlists.items)
-			})
-	}, [])
+		request(
+			"https://api.spotify.com/v1/browse/categories/toplists/playlists?country=UZ&offset=0&limit=5"
+		).then((res) => {
+			setMyAlbom(res.playlists.items);
+		});
+	}, []);
+
+	if (loading) {
+		return <Audio height="100" width="100" />;
+	}
 
 	return (
 		<>
@@ -53,19 +58,17 @@ const Home = () => {
 				Your top mixes
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				{
-					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
-				}
-
-
+				{myAlbom.map((item, idx) => (
+					<GoToPlayList item={item} key={idx} />
+				))}
 			</div>
 			<p className="font-bold text-[30px] text-[#fff] font-Manrope mt-[50px] mb-[26px]">
 				Made for you
 			</p>
 			<div className="flex flex-wrap gap-[30px]">
-				{
-					myAlbom.map((item , idx) => <GoToPlayList item={item} key={idx} />)
-				}
+				{myAlbom.map((item, idx) => (
+					<GoToPlayList item={item} key={idx} />
+				))}
 			</div>
 		</>
 	);
