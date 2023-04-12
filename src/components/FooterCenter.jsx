@@ -10,10 +10,19 @@ const FooterCenter = () => {
    const {changeNextMusic, nextMusic} = useContext(nextMusicCTX)
    const {changePrevMusic, prevMusic} = useContext(prevMusicCTX)
 	let { play, changePlay, src } = useContext(musicCTX);
-
+	const {setTime , time} = useContext(musicTimeCTX);
+	
+	let calculateTime = (secs) => {
+		let minutes = Math.floor(secs / 60);
+		let seconds = Math.floor(secs % 60);
+		let returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+		return `${minutes}:${returnedSeconds}`;
+	}
 	useEffect(() => {
 		let audio = document.querySelector("audio");
-		play ? audio.play() : audio.pause();
+		play ? audio.play() && calculateTime(audio.duration) : audio.pause();
+		// console.log(audio.duration);
+		setTime(Math.ceil(audio.duration))
 	}, [play, src]);
 
 	const [progress, setProgress] = useState(0);
@@ -74,7 +83,7 @@ const FooterCenter = () => {
 				sx={{ width: "550px", height: "5px", color: "#fff" }}
 			/>
 			<audio
-            onEnded={changeNextMusic}
+        onEnded={changeNextMusic}
 				src={src}
 				onTimeUpdate={(e) => uptadeProgress(e.target)}
 			></audio>

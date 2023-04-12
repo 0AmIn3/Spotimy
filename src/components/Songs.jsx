@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
 import { useHttp } from "../hook/http.hook";
+
 import { musicIndexCTX } from "../contexts/musicIndexCTX";
 
 const Songs = ({ item, idx, ChangeAdd }) => {
@@ -25,7 +26,8 @@ const Songs = ({ item, idx, ChangeAdd }) => {
 	const token = useContext(tokenCTX);
 	const { Setreload } = useContext(reloadPlaylistsCTX);
 	const { request } = useHttp();
-
+	const {setTime , time} = useContext(musicTimeCTX);
+	
 	function AddTrank(trackuri) {
 		request(
 			`https://api.spotify.com/v1/playlists/${paramsID.id}/tracks`,

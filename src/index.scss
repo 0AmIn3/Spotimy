@@ -56,9 +56,11 @@
 .hovercont {
   transition: 0.3s;
    overflow: unset;
+   z-index: 0;
+   overflow: hidden;
   &:hover .playhover {
     opacity: 1;
-    bottom: 0px;
+    bottom: 10px;
   }
 
   .linear {
@@ -69,7 +71,7 @@
     opacity: 0;
     right: 0;
     transition: 0.3s;
-  }
+}
 }
 .hovercontwo {
    transition: 0.3s;

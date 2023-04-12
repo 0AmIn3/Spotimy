@@ -8,6 +8,7 @@ import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 import { musicCTX } from "../contexts/musicCTX";
 import { musicInfoCTX } from "../contexts/musicInfoCTX";
+import { musicTimeCTX } from "../contexts/musicTimeCTX";
 import { openBigImgCTX } from "../contexts/openBigImgCTX";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
@@ -67,50 +68,50 @@ const Layout = () => {
 		setSrc(src);
 	};
 
-	const changeInfo = (songimg, songimgbig, songtitle, songartist) => {
-		setInfo({
-			img: songimg,
-			imgbig: songimgbig,
-			title: songtitle,
-			artist: songartist,
-		});
-	};
+  const changeInfo = (songimg, songimgbig, songtitle, songartist) => {
+    setInfo({
+      img: songimg,
+      imgbig: songimgbig,
+      title: songtitle,
+      artist: songartist,
+    });
+  };
 
-	let setSearchResults = (text) => {
-		let uptadeText = text.toLowerCase().trim();
-		setSearch(uptadeText);
-	};
-	const [playlist, setPlaylist] = useState([]);
-	const { client_id, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE } =
-		useContext(spotify);
+  let setSearchResults = (text) => {
+    let uptadeText = text.toLowerCase().trim();
+    setSearch(uptadeText);
+  };
+  const [playlist, setPlaylist] = useState([]);
+  const { client_id, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE } =
+    useContext(spotify);
 
-	useEffect(() => {
-		const hash = window.location.hash;
-		let localedTOKEN = window.localStorage.getItem("token");
+  useEffect(() => {
+    const hash = window.location.hash;
+    let localedTOKEN = window.localStorage.getItem("token");
 
-		if (!localedTOKEN && hash) {
-			localedTOKEN = hash
-				.substring(1)
-				.split("&")
-				.find((elem) => elem.startsWith("access_token"))
-				.split("=")[1];
+    if (!localedTOKEN && hash) {
+      localedTOKEN = hash
+        .substring(1)
+        .split("&")
+        .find((elem) => elem.startsWith("access_token"))
+        .split("=")[1];
 
-			window.location.href = "";
-			window.localStorage.setItem("token", localedTOKEN);
-		}
+      window.location.href = "";
+      window.localStorage.setItem("token", localedTOKEN);
+    }
 
-		setToken(localedTOKEN);
-	}, []);
+    setToken(localedTOKEN);
+  }, []);
 
-	if (!token) {
-		return (
-			<a
-				href={`${AUTH_ENDPOINT}?client_id=${client_id}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`}
-			>
-				<button className="log-in-btn">Log in</button>
-			</a>
-		);
-	}
+  if (!token) {
+    return (
+      <a
+        href={`${AUTH_ENDPOINT}?client_id=${client_id}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`}
+      >
+        <button className="log-in-btn">Log in</button>
+      </a>
+    );
+  }
 
 	return (
 		<tokenCTX.Provider value={token}>
