@@ -80,7 +80,6 @@ const CreatePlaylist = () => {
 		fmr.forEach((value, key) => {
 			playlist[key] = value;
 		});
-
 		post(playlist);
 	}
 
