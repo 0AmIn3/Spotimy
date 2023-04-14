@@ -15,6 +15,7 @@ import { bgColorCTX } from "../contexts/bgColorCTX";
 import {nextMusicCTX} from '../contexts/nextMusicCTX'
 import {prevMusicCTX} from '../contexts/prevMusicCTX'
 import {musicIndexCTX} from '../contexts/musicIndexCTX'
+import spotifyLogo from "../../public/images/Black_Spotify_logo_with_text.svg"
 
 const Layout = () => {
 	const [token, setToken] = useState("");
@@ -104,11 +105,32 @@ const Layout = () => {
 
   if (!token) {
     return (
-      <a
-        href={`${AUTH_ENDPOINT}?client_id=${client_id}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`}
-      >
-        <button className="log-in-btn">Log in</button>
-      </a>
+		<div className="bg-[#ffffff]">
+			<div className="pt-[25px] ">
+				<div className="flex justify-center"><img className=" w-[145px] mb-[20px]" src={spotifyLogo} alt="" /></div>
+				<div className="line"></div>				
+			</div>
+			<div className="flex justify-center mt-[40px]">
+				<div className="log-in">
+					<h3 className="text-black font-bold mb-[10px]">To continue,log in to Spotify.</h3>
+					<ul className="grid gap-[10px]">
+						<li className="" >
+							<button className="w-[450px] h-[50px] rounded-[500px] bg-[#1877f2] text-[#ffffff] font-bold">CONTINUE WITH FACEBOOK</button>
+						</li>
+						<li className="" >
+							<button className="w-[450px] h-[50px] rounded-[500px] bg-[#000000e6] text-[#ffffff] font-bold">CONTINUE WITH APPLE</button>
+						</li>
+						<li className="" >
+							<button className="w-[450px] h-[50px] rounded-[500px] bg-[#ffffff] text-[#6a6a6a] font-bold border-2 border-neutral-600">CONTINUE WITH GOOGLE</button>
+						</li>
+						<li>
+						<a className="flex justify-center" href={`${AUTH_ENDPOINT}?client_id=${client_id}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`} >
+				        <button className="bg-[#65d46e] rounded-[500px] h-[48px] w-[120px] font-bold">LOG IN </button></a>	
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
     );
   }
 
@@ -117,7 +139,7 @@ const Layout = () => {
 			<searchCTX.Provider value={{ setSearchResults, search }}>
 				<musicCTX.Provider
 					value={{
-						changePlay,
+						changePlay, 
 						changeId,
 						changeSrc,
 						changePlayTrue,
