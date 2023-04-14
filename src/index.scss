@@ -49,8 +49,9 @@
    color: white;
 }
 .line{
-   width: 100%;
-   border: 1px solid #282828;
+  border-bottom: 1px solid rgb(217, 218, 220);
+  text-align: center;
+  width: 100%;
 }
 
 .hovercont {
@@ -240,6 +241,9 @@
   background-color: rgba(40, 40, 40, 0.32);
   z-index: 1;
   display: none;
+}
+.log-in{
+  text-align: center;
 }
 .changeImg{
   // opacity: 0;
