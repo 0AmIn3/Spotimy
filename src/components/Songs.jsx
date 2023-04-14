@@ -26,7 +26,6 @@ const Songs = ({ item, idx, ChangeAdd }) => {
 	const token = useContext(tokenCTX);
 	const { Setreload } = useContext(reloadPlaylistsCTX);
 	const { request } = useHttp();
-	const {setTime , time} = useContext(musicTimeCTX);
 	
 	function AddTrank(trackuri) {
 		request(

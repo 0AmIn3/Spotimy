@@ -31,11 +31,11 @@ const {index} = useContext(musicIndexCTX)
   //   player ? audio.player() : audio.pause()
   // }, [player])
 
-
-
+// console.log(nextMusic);
+// console.log(prevMusic);
   useEffect(() => {
+  
     if(player) {
-	console.log(count);
 	 request(`https://api.spotify.com/v1/playlists/${id}/tracks`).then(
 			(res) => {
 				
@@ -66,9 +66,7 @@ const {index} = useContext(musicIndexCTX)
     }
   }, [play])
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+
   useEffect(() => {
   setCount(index)
 }, [index])
@@ -85,6 +83,9 @@ useEffect(() => {
 }, [prevMusic])
 
 
+const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
   return (
     <div className="flex justify-between px-1 select-none">

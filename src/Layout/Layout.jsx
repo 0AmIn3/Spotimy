@@ -8,7 +8,6 @@ import { spotify } from "../contexts/spotifyCTX";
 import { tokenCTX } from "../contexts/tokenCTX";
 import { musicCTX } from "../contexts/musicCTX";
 import { musicInfoCTX } from "../contexts/musicInfoCTX";
-import { musicTimeCTX } from "../contexts/musicTimeCTX";
 import { openBigImgCTX } from "../contexts/openBigImgCTX";
 import { myPlaylistCTX } from "../contexts/myPlaylistsCTX";
 import { reloadPlaylistsCTX } from "../contexts/reloadPlaylistsCTX";
