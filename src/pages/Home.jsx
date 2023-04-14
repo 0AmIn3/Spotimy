@@ -11,12 +11,14 @@ import { useHttp } from "../hook/http.hook";
 const Home = () => {
 	const token = useContext(tokenCTX);
 	const [MyPlaylists, setMyPlaylists] = useState([]);
+	const { setPlaylist } = useContext(myPlaylistCTX);
 	const [myAlbom, setMyAlbom] = useState([]);
 	const { loading, error, request } = useHttp();
 
 	useEffect(() => {
 		request("https://api.spotify.com/v1/me/playlists").then((res) => {
 			setMyPlaylists(res.items);
+			setPlaylist(res.items);
 		});
 	}, []);
 
