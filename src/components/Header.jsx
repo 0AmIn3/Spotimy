@@ -9,6 +9,7 @@ const Header = ({goBack, next}) => {
 	const [user, setUser] = useState('')
 	const {loading, error, request} = useHttp()
 	const {setSearchResults} = useContext(searchCTX)
+	const [show, setShow] = useState(false)
 	const {pathname} = useLocation();
 
 	window.onscroll = () => {
@@ -67,7 +68,7 @@ const Header = ({goBack, next}) => {
 				) : null}
 			</div>
 			<div className="">
-				<button
+				<button onClick={() => setShow(!show)}
 					id="dropdownAvatarNameButton"
 					data-dropdown-toggle="dropdownAvatarName"
 					className="flex bg-[#000000] py-[3px] pr-[12px] pl-[3px] items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 "
@@ -90,20 +91,20 @@ const Header = ({goBack, next}) => {
 				</button>
 				<div
 					id="dropdownAvatarName"
-					className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+					className="absolute z-10 w-44 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600" style={{display: show ? 'block' : 'none'}}
 				>
-					<div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+					<div className="py-3 px-4 text-sm text-gray-900 text-white">
 						<div className="font-medium ">Pro User</div>
 						<div className="truncate">name@flowbite.com</div>
 					</div>
 					<ul
-						className="py-1 text-sm text-gray-700 dark:text-gray-200"
+						className="py-1 text-sm text-gray-700 text-gray-200"
 						aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton"
 					>
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+								className="block py-2 px-4 text-white hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
 							>
 								Dashboard
 							</a>
@@ -111,7 +112,7 @@ const Header = ({goBack, next}) => {
 						<li>
 							<Link
 								to={"/settings"}
-								className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+								className="block py-2 text-white px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
 							>
 								Settings
 							</Link>
@@ -119,7 +120,7 @@ const Header = ({goBack, next}) => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+								className="block py-2 px-4 text-white hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
 							>
 								Earnings
 							</a>
@@ -127,7 +128,7 @@ const Header = ({goBack, next}) => {
 					</ul>
 					<div className="py-1" onClick={localClear}>
 						<p 
-							className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+							className="block py-2 px-4 text-sm text-white hover:bg-gray-100 hover:bg-gray-600 text-gray-200 hover:text-white"
 						>
 							Sign out
 						</p>
