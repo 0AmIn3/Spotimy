@@ -25,6 +25,7 @@ const SearchPage = () => {
 	const { changeSrc, changeId, changePlay, changePlayTrue, id } = useContext(musicCTX)
 	const { changeInfo } = useContext(musicInfoCTX)
 	const { loading, error, request } = useHttp()
+	const [browsCat , setBrowsCat] = useState([])
 
 	useEffect(() => {
 
@@ -38,6 +39,20 @@ const SearchPage = () => {
 		let body = document.body
 		body.style.background = '#070707'
 	})
+
+	useEffect(() => {
+		request('https://api.spotify.com/v1/browse/categories?country=UZ&offset=0&limit=20')
+		.then((res) => setBrowsCat(res.categories.items))
+	}, [])
+
+	function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 
 	return (
 		<div className="">
@@ -158,14 +173,9 @@ const SearchPage = () => {
 					<div className="flex flex-col gap-7 mt-[70px]">
 						<h1 className=" text-3xl text-white font-bold">Browse all</h1>
 						<div className="grid gap-7 grid-cols-4 ">
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
-							<GenresMini />
+							{
+								browsCat.map((item) => <GenresMini item={item} rondomColor={getRandomColor} /> )
+							}
 						</div>
 					</div>
 				</>

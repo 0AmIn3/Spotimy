@@ -1,10 +1,11 @@
 import React from 'react';
 
-const GenresMini = () => {
+const GenresMini = ({item, rondomColor}) => {
+    
     return (
-        <div className=' w-[240px] bg-[#876AA7]  min-w-[240px]  h-[240px] relative p-[21px] rounded-[14px] overflow-hidden'>
-           <p className="ml-[15px] text-[50px] font-bold text-[white]">Pop</p>
-            <img className=" mt-[90px] w-[130px] h-[130px] absolute bottom-0 right-0" src="/img/art1.png" alt="" />
+        <div className='w-[240px] bg-[#37315B]  min-w-[240px]  h-[240px] relative p-[21px] rounded-[14px] overflow-hidden'>
+           <p className="ml-[15px] text-[30px] font-semibold text-[white]">{item?.name}</p>
+            <img className="mt-[90px]  w-[120px] h-[120px] absolute  bottom-[-20px] right-[-20px] rotate-[30deg]" src={item?.icons[0]?.url} alt="" />
         </div>
     );
 };
